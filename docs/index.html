@@ -452,6 +452,21 @@ let cupos = {}, registros = {}, regList = [], lastConf = null;
 NIVELES.forEach(n => GROUPS.forEach(g => { cupos[`${n.num}-${g}`] = 0; }));
 let selRuta = null, selGrp = {1:null,2:null,3:null};
 
+async function cargarCupos() {
+  try {
+    const res = await fetch(`${SHEET_URL}?action=cupos`);
+    const data = await res.json();
+    if (data.ok && data.cupos) {
+      NIVELES.forEach(n => GROUPS.forEach(g => {
+        const key = `${n.num}-${g}`;
+        cupos[key] = MAX - (data.cupos[key] !== undefined ? data.cupos[key] : MAX);
+      }));
+      if (selRuta) renderNiveles();
+    }
+  } catch(e) { console.warn('No se pudieron cargar cupos:', e); }
+}
+cargarCupos();
+
 function goScreen(id) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
@@ -542,15 +557,18 @@ async function handleSubmit(){
   btn.innerHTML='<span class="spinner"></span>Registrando…';
 
   try {
-    await fetch(SHEET_URL, {
+    const res = await fetch(SHEET_URL, {
       method: 'POST',
       mode: 'no-cors',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(payload)
     });
-  } catch(e){ console.warn('Error enviando a Sheets:',e); }
-
-  NIVELES.forEach(n=>{cupos[`${n.num}-${selGrp[n.num]}`]++;});
+    // Con no-cors no podemos leer la respuesta, actualizamos cupos localmente
+    NIVELES.forEach(n=>{cupos[`${n.num}-${selGrp[n.num]}`]++;});
+  } catch(e) {
+    console.warn('Error enviando a Sheets:',e);
+    NIVELES.forEach(n=>{cupos[`${n.num}-${selGrp[n.num]}`]++;});
+  }
   registros[ced]=payload; regList.push(payload); lastConf=payload;
 
   document.getElementById('confBody').innerHTML=`
