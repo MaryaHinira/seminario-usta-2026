@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seminario de Humanidades · USTA Villavicencio 2026-1</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cream: #F5F0E8;
+      --cream-dark: #EDE7D9;
+      --ink: #1A1714;
+      --ink-mid: #4A4540;
+      --ink-light: #8A837A;
+      --gold: #8B6914;
+      --gold-light: #C49A2A;
+      --gold-bg: #FBF5E6;
+      --burgundy: #6B1E2E;
+      --teal: #1B5C52;
+      --teal-light: #E6F2F0;
+      --red-soft: #FBEDED;
+      --red-text: #7A2020;
+      --green-soft: #EBF5EC;
+      --green-text: #1A5C1E;
+      --amber-soft: #FBF3E0;
+      --amber-text: #7A5010;
+      --border: rgba(26,23,20,0.12);
+      --border-mid: rgba(26,23,20,0.2);
+      --radius: 6px;
+      --radius-lg: 12px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--ink); min-height: 100vh; }
+
+    .site-header { background: var(--ink); padding: 18px 24px; display: flex; align-items: center; gap: 16px; }
+    .site-header-logo { font-family: 'Crimson Pro', serif; font-size: 15px; color: var(--cream); line-height: 1.3; opacity: .9; }
+    .site-header-logo strong { display: block; font-weight: 600; font-size: 16px; }
+    .header-divider { width: 1px; height: 32px; background: rgba(255,255,255,.2); }
+    .site-header-title { font-family: 'Crimson Pro', serif; font-size: 17px; color: rgba(255,255,255,.75); font-weight: 300; font-style: italic; }
+    .header-admin-link { margin-left: auto; font-size: 12px; color: rgba(255,255,255,.4); cursor: pointer; background: none; border: none; text-decoration: underline; }
+    .header-admin-link:hover { color: rgba(255,255,255,.7); }
+
+    .container { max-width: 680px; margin: 0 auto; padding: 32px 20px 60px; }
+    .screen { display: none; }
+    .screen.active { display: block; }
+
+    .hero { margin-bottom: 32px; }
+    .hero-eyebrow { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); font-weight: 500; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+    .hero-eyebrow::before { content: ''; display: block; width: 24px; height: 1px; background: var(--gold); }
+    .hero h1 { font-family: 'Crimson Pro', serif; font-size: 34px; font-weight: 300; line-height: 1.2; margin-bottom: 10px; }
+    .hero h1 em { font-style: italic; color: var(--gold); }
+    .hero-sub { font-size: 14px; color: var(--ink-mid); line-height: 1.6; }
+
+    .guide-box { border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; margin-bottom: 28px; background: white; }
+    .guide-toggle { width: 100%; background: var(--gold-bg); border: none; padding: 14px 18px; display: flex; align-items: center; gap: 10px; cursor: pointer; text-align: left; }
+    .guide-toggle-text { font-size: 13px; font-weight: 500; color: var(--gold); flex: 1; }
+    .guide-toggle-sub { font-size: 12px; color: var(--ink-light); margin-top: 1px; }
+    .guide-chevron { margin-left: auto; color: var(--gold); font-size: 16px; transition: transform .2s; }
+    .guide-chevron.open { transform: rotate(180deg); }
+    .guide-body { display: none; padding: 20px; border-top: 1px solid var(--border); }
+    .guide-body.open { display: block; }
+    .g-step { display: flex; gap: 14px; margin-bottom: 22px; }
+    .g-step:last-child { margin-bottom: 0; }
+    .g-num { width: 26px; height: 26px; min-width: 26px; border-radius: 50%; background: var(--ink); color: var(--cream); font-size: 12px; font-weight: 500; display: flex; align-items: center; justify-content: center; margin-top: 2px; }
+    .g-title { font-size: 14px; font-weight: 500; margin-bottom: 5px; }
+    .g-text { font-size: 13px; color: var(--ink-mid); line-height: 1.7; }
+    .g-text ul { padding-left: 16px; margin-top: 5px; }
+    .g-text li { margin-bottom: 4px; }
+    .g-text strong { color: var(--ink); font-weight: 500; }
+    .g-table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 12px; }
+    .g-table th { text-align: left; padding: 6px 10px; background: var(--cream-dark); color: var(--ink-mid); font-weight: 500; border-bottom: 1px solid var(--border); }
+    .g-table td { padding: 7px 10px; border-bottom: 1px solid var(--border); color: var(--ink); }
+    .g-table tr:last-child td { border-bottom: none; }
+    .g-divider { border: none; border-top: 1px solid var(--border); margin: 18px 0; }
+    .warn-box { background: var(--amber-soft); border: 1px solid rgba(122,80,16,.2); border-radius: var(--radius); padding: 10px 14px; font-size: 12px; color: var(--amber-text); margin-top: 10px; line-height: 1.6; }
+    .badge-ok  { background: var(--green-soft); color: var(--green-text); font-size: 11px; border-radius: 20px; padding: 2px 8px; display: inline-block; }
+    .badge-low { background: var(--amber-soft); color: var(--amber-text); font-size: 11px; border-radius: 20px; padding: 2px 8px; display: inline-block; }
+    .badge-full{ background: var(--red-soft);   color: var(--red-text);   font-size: 11px; border-radius: 20px; padding: 2px 8px; display: inline-block; }
+
+    .sec-label { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-light); font-weight: 500; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+    .sec-num { width: 20px; height: 20px; background: var(--ink); color: var(--cream); font-size: 10px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .sec-divider { border: none; border-top: 1px solid var(--border); margin: 28px 0; }
+
+    .rutas-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 28px; }
+    .ruta-card { border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 18px; cursor: pointer; background: white; transition: border-color .15s; position: relative; }
+    .ruta-card:hover { border-color: var(--gold-light); }
+    .ruta-card.selected { border: 2px solid var(--gold); background: var(--gold-bg); }
+    .ruta-card.selected::after { content: '✓'; position: absolute; top: 10px; right: 12px; font-size: 13px; color: var(--gold); font-weight: 600; }
+    .ruta-icon { font-size: 22px; color: var(--ink-light); margin-bottom: 10px; }
+    .ruta-card.selected .ruta-icon { color: var(--gold); }
+    .ruta-num { font-size: 11px; color: var(--ink-light); margin-bottom: 4px; letter-spacing: .05em; text-transform: uppercase; }
+    .ruta-card.selected .ruta-num { color: var(--gold); }
+    .ruta-title { font-family: 'Crimson Pro', serif; font-size: 18px; font-weight: 600; color: var(--ink); margin-bottom: 5px; }
+    .ruta-desc { font-size: 12px; color: var(--ink-mid); line-height: 1.6; }
+
+    .nivel-block { border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; margin-bottom: 12px; background: white; }
+    .nivel-header { background: var(--cream-dark); padding: 11px 16px; display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
+    .nivel-pill { font-size: 11px; font-weight: 500; background: var(--ink); color: var(--cream); border-radius: 20px; padding: 2px 10px; }
+    .nivel-fecha { font-size: 13px; font-weight: 500; }
+    .nivel-hora { font-size: 12px; color: var(--ink-mid); margin-left: auto; }
+    .grupos-row { display: grid; grid-template-columns: repeat(5,1fr); }
+    .grupo-btn { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 11px 6px; gap: 5px; background: white; border: none; border-right: 1px solid var(--border); border-top: 1px solid var(--border); cursor: pointer; transition: background .12s; }
+    .grupo-btn:last-child { border-right: none; }
+    .grupo-btn:hover:not([disabled]) { background: var(--cream); }
+    .grupo-btn.selected { background: var(--gold-bg); }
+    .grupo-btn[disabled] { opacity: .35; cursor: not-allowed; background: var(--cream-dark); }
+    .g-label { font-size: 13px; font-weight: 500; }
+    .grupo-btn.selected .g-label { color: var(--gold); }
+    .g-cupos { font-size: 11px; border-radius: 20px; padding: 2px 7px; white-space: nowrap; }
+    .g-check { font-size: 12px; color: var(--gold); }
+
+    .fields-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .field { display: flex; flex-direction: column; gap: 5px; }
+    .field.full { grid-column: 1/-1; }
+    label { font-size: 12px; color: var(--ink-mid); font-weight: 500; }
+    input[type=text], input[type=email], input[type=password], select { font-family: 'DM Sans', sans-serif; font-size: 14px; padding: 9px 12px; border: 1px solid var(--border-mid); border-radius: var(--radius); background: white; color: var(--ink); outline: none; transition: border-color .15s; }
+    input:focus, select:focus { border-color: var(--gold-light); }
+    .err-msg { font-size: 12px; color: var(--red-text); display: none; }
+
+    .summary-card { border: 1px solid rgba(139,105,20,.3); border-radius: var(--radius-lg); padding: 16px 18px; background: var(--gold-bg); margin-bottom: 20px; display: none; }
+    .summary-card.visible { display: block; }
+    .sum-row { display: flex; justify-content: space-between; font-size: 13px; padding: 4px 0; border-bottom: 1px solid rgba(139,105,20,.15); }
+    .sum-row:last-of-type { border-bottom: none; }
+    .sum-row span:first-child { color: var(--ink-mid); }
+    .sum-row span:last-child { font-weight: 500; }
+
+    .alert-bar { background: var(--red-soft); border: 1px solid rgba(122,32,32,.2); border-radius: var(--radius); padding: 10px 14px; font-size: 13px; color: var(--red-text); margin-bottom: 14px; display: none; }
+    .alert-bar.on { display: block; }
+
+    .submit-btn { width: 100%; padding: 13px; background: var(--ink); color: var(--cream); border: none; border-radius: var(--radius); font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; cursor: pointer; letter-spacing: .02em; transition: background .15s; }
+    .submit-btn:hover { background: var(--burgundy); }
+    .submit-btn.loading { opacity: .6; cursor: wait; }
+
+    .success-wrap { text-align: center; padding: 20px 0; }
+    .success-icon { font-size: 52px; color: var(--teal); margin-bottom: 16px; }
+    .success-h { font-family: 'Crimson Pro', serif; font-size: 28px; font-weight: 300; margin-bottom: 6px; }
+    .success-sub { font-size: 13px; color: var(--ink-mid); margin-bottom: 24px; line-height: 1.6; }
+    .conf-card { border: 1px solid var(--border); border-radius: var(--radius-lg); background: white; padding: 18px; text-align: left; margin-bottom: 18px; }
+    .conf-header-block { margin-bottom: 14px; padding-bottom: 14px; border-bottom: 1px solid var(--border); }
+    .conf-logo-title { font-family: 'Crimson Pro', serif; font-size: 16px; font-weight: 600; }
+    .conf-logo-sub { font-size: 12px; color: var(--ink-mid); margin-top: 2px; }
+    .conf-row { display: flex; justify-content: space-between; font-size: 13px; padding: 4px 0; border-bottom: 1px solid var(--border); }
+    .conf-row:last-child { border-bottom: none; }
+    .conf-row span:first-child { color: var(--ink-mid); }
+    .conf-code-section { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border); text-align: center; }
+    .conf-code { font-family: 'Crimson Pro', serif; font-size: 26px; font-weight: 600; color: var(--gold); letter-spacing: .08em; margin: 4px 0; }
+    .btn-row { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+    .btn-dl { background: var(--teal); color: white; border: none; border-radius: var(--radius); padding: 10px 20px; font-size: 13px; font-weight: 500; cursor: pointer; display: flex; align-items: center; gap: 7px; font-family: 'DM Sans', sans-serif; }
+    .btn-dl:hover { background: #134840; }
+    .btn-ghost { background: white; color: var(--ink); border: 1px solid var(--border-mid); border-radius: var(--radius); padding: 10px 20px; font-size: 13px; cursor: pointer; font-family: 'DM Sans', sans-serif; }
+    .btn-ghost:hover { background: var(--cream); }
+
+    .admin-login-wrap { max-width: 340px; margin: 40px auto; }
+    .admin-card { background: white; border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 28px; }
+    .admin-card h2 { font-family: 'Crimson Pro', serif; font-size: 22px; font-weight: 300; margin-bottom: 6px; }
+    .admin-card p { font-size: 13px; color: var(--ink-mid); margin-bottom: 20px; }
+    .admin-field { display: flex; flex-direction: column; gap: 5px; margin-bottom: 12px; }
+    .admin-btn { width: 100%; padding: 11px; background: var(--ink); color: var(--cream); border: none; border-radius: var(--radius); font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; cursor: pointer; margin-top: 4px; }
+    .admin-btn:hover { background: var(--burgundy); }
+    .admin-err { font-size: 12px; color: var(--red-text); text-align: center; margin-top: 8px; display: none; }
+    .back-link { font-size: 12px; color: var(--ink-light); cursor: pointer; background: none; border: none; text-decoration: underline; margin-top: 12px; display: block; text-align: center; }
+
+    .admin-topbar { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px; }
+    .admin-topbar h2 { font-family: 'Crimson Pro', serif; font-size: 24px; font-weight: 300; }
+    .logout-btn { font-size: 12px; color: var(--ink-mid); border: 1px solid var(--border); background: white; border-radius: var(--radius); padding: 6px 12px; cursor: pointer; }
+    .stats-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 24px; }
+    .stat-card { background: white; border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 14px 16px; }
+    .stat-label { font-size: 11px; color: var(--ink-light); text-transform: uppercase; letter-spacing: .07em; margin-bottom: 5px; }
+    .stat-val { font-family: 'Crimson Pro', serif; font-size: 28px; font-weight: 300; }
+    .tab-bar { display: flex; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; margin-bottom: 20px; }
+    .tab-btn { flex: 1; padding: 9px; font-size: 13px; background: white; border: none; border-right: 1px solid var(--border); cursor: pointer; color: var(--ink-mid); font-family: 'DM Sans', sans-serif; }
+    .tab-btn:last-child { border-right: none; }
+    .tab-btn.active { background: var(--ink); color: var(--cream); }
+    .filter-row { display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
+    .filter-row input, .filter-row select { font-size: 13px; flex: 1; min-width: 120px; }
+    .table-wrap { border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; overflow-x: auto; margin-bottom: 10px; background: white; }
+    table.list { width: 100%; border-collapse: collapse; font-size: 12px; min-width: 600px; }
+    table.list th { background: var(--cream-dark); text-align: left; padding: 9px 10px; color: var(--ink-mid); font-weight: 500; border-bottom: 1px solid var(--border); white-space: nowrap; }
+    table.list td { padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+    table.list tr:last-child td { border-bottom: none; }
+    table.list tr:hover td { background: var(--cream); }
+    .badge-r1 { background: var(--gold-bg); color: var(--gold); font-size: 10px; border-radius: 20px; padding: 2px 8px; }
+    .badge-r2 { background: var(--teal-light); color: var(--teal); font-size: 10px; border-radius: 20px; padding: 2px 8px; }
+    .empty-st { text-align: center; padding: 28px; font-size: 13px; color: var(--ink-light); }
+    .cupos-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
+    .cupos-block { background: white; border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
+    .cupos-block-hdr { background: var(--cream-dark); padding: 9px 14px; font-size: 12px; font-weight: 500; border-bottom: 1px solid var(--border); }
+    .cupos-row { display: flex; justify-content: space-between; align-items: center; padding: 7px 14px; border-bottom: 1px solid var(--border); font-size: 12px; }
+    .cupos-row:last-child { border-bottom: none; }
+    .cupos-bar-wrap { width: 40px; height: 4px; background: var(--cream-dark); border-radius: 2px; overflow: hidden; display: inline-block; vertical-align: middle; margin-right: 5px; }
+    .cupos-bar-fill { height: 100%; border-radius: 2px; }
+    .count-lbl { font-size: 11px; color: var(--ink-light); }
+    .admin-note { font-size: 12px; color: var(--ink-mid); }
+    .spinner { display: inline-block; width: 14px; height: 14px; border: 2px solid rgba(255,255,255,.3); border-top-color: white; border-radius: 50%; animation: spin .7s linear infinite; vertical-align: -2px; margin-right: 6px; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header-logo">
+    <strong>Universidad Santo Tomás</strong>
+    Seccional Villavicencio
+  </div>
+  <div class="header-divider"></div>
+  <div class="site-header-title">Seminario de Humanidades 2026-1</div>
+  <button class="header-admin-link" onclick="goScreen('screenAdminLogin')">Admin</button>
+</header>
+
+<!-- ── FORMULARIO ── -->
+<div class="screen active" id="screenForm">
+<div class="container">
+  <div class="hero">
+    <div class="hero-eyebrow">Inscripción docentes</div>
+    <h1>Seminario de Humanidades<br>y <em>Pensamiento Tomista</em></h1>
+    <p class="hero-sub">Junio 2026 · Tres niveles · Dos rutas de aprendizaje</p>
+  </div>
+
+  <div class="guide-box">
+    <button class="guide-toggle" onclick="toggleGuide()">
+      <span style="font-size:18px;color:var(--gold)">📖</span>
+      <span>
+        <div class="guide-toggle-text">Guía de inscripción — léala antes de comenzar</div>
+        <div class="guide-toggle-sub">Instrucciones detalladas paso a paso</div>
+      </span>
+      <span class="guide-chevron open" id="guideChevron">▾</span>
+    </button>
+    <div class="guide-body open" id="guideBody">
+      <div class="g-step">
+        <div class="g-num">1</div>
+        <div>
+          <div class="g-title">¿Qué es este seminario?</div>
+          <div class="g-text">El <strong>Seminario de Humanidades y Pensamiento Tomista 2026-1</strong> es un espacio académico obligatorio para todos los docentes de la Universidad Santo Tomás, seccional Villavicencio. Su propósito es fortalecer las competencias docentes en lectura académica y producción escrita desde una perspectiva humanista y tomista.</div>
+        </div>
+      </div>
+      <div class="g-divider"></div>
+      <div class="g-step">
+        <div class="g-num">2</div>
+        <div>
+          <div class="g-title">Las dos rutas: escoge solo una</div>
+          <div class="g-text">El seminario ofrece <strong>dos rutas de aprendizaje</strong>. Debes escoger <strong>una sola ruta</strong> y cursarla completa:
+            <ul>
+              <li><strong>Ruta 1 — Lectura crítica:</strong> análisis, interpretación y evaluación de textos académicos y filosóficos en clave tomista.</li>
+              <li><strong>Ruta 2 — Comunicación escrita:</strong> procesos de escritura académica, argumentación y producción textual universitaria.</li>
+            </ul>
+            <div class="warn-box">⚠️ <strong>Importante:</strong> una vez confirmes tu inscripción, <strong>no podrás cambiar de ruta</strong>. Reflexiona bien antes de elegir.</div>
+          </div>
+        </div>
+      </div>
+      <div class="g-divider"></div>
+      <div class="g-step">
+        <div class="g-num">3</div>
+        <div>
+          <div class="g-title">Los tres niveles: fechas y horarios</div>
+          <div class="g-text">Cada ruta se desarrolla en <strong>tres niveles progresivos</strong> en días consecutivos. La asistencia a los tres es <strong>obligatoria</strong>:
+            <table class="g-table">
+              <thead><tr><th>Nivel</th><th>Fecha</th><th>Horario</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Nivel 1</strong></td><td>Martes 7 de junio de 2026</td><td>10:00 a.m. – 12:00 m.</td></tr>
+                <tr><td><strong>Nivel 2</strong></td><td>Miércoles 8 de junio de 2026</td><td>8:30 a.m. – 10:00 a.m.</td></tr>
+                <tr><td><strong>Nivel 3</strong></td><td>Jueves 9 de junio de 2026</td><td>10:30 a.m. – 12:00 m.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="g-divider"></div>
+      <div class="g-step">
+        <div class="g-num">4</div>
+        <div>
+          <div class="g-title">Los grupos: un grupo por cada nivel (tres en total)</div>
+          <div class="g-text">Para cada nivel hay <strong>cinco grupos (A, B, C, D, E)</strong>, todos con el mismo contenido. Debes escoger <strong>un grupo por nivel</strong>, es decir tres grupos en total.
+            <ul>
+              <li>Puedes elegir grupos distintos en cada nivel.</li>
+              <li>Cada grupo tiene máximo <strong>20 docentes</strong>.</li>
+              <li>Indicadores de cupos: <span class="badge-ok">disponible</span> &nbsp; <span class="badge-low">casi lleno</span> &nbsp; <span class="badge-full">lleno</span></li>
+            </ul>
+            <div class="warn-box">⚠️ <strong>Importante:</strong> una vez confirmada la inscripción, <strong>no podrás cambiar de grupo</strong>.</div>
+          </div>
+        </div>
+      </div>
+      <div class="g-divider"></div>
+      <div class="g-step">
+        <div class="g-num">5</div>
+        <div>
+          <div class="g-title">Tus datos y confirmación</div>
+          <div class="g-text">Diligencia nombres, apellidos, cédula, correo institucional y programa. Al confirmar recibirás un <strong>comprobante descargable con código único</strong>. Cada docente solo puede inscribirse <strong>una vez</strong>; el sistema verifica tu cédula.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-label"><span class="sec-num">1</span>Selecciona tu ruta de aprendizaje</div>
+  <div class="rutas-grid">
+    <div class="ruta-card" data-ruta="1" onclick="selectRuta(1)">
+      <div class="ruta-icon">📚</div>
+      <div class="ruta-num">Ruta 1</div>
+      <div class="ruta-title">Lectura crítica</div>
+      <div class="ruta-desc">Análisis, interpretación y evaluación de textos académicos y filosóficos.</div>
+    </div>
+    <div class="ruta-card" data-ruta="2" onclick="selectRuta(2)">
+      <div class="ruta-icon">✍️</div>
+      <div class="ruta-num">Ruta 2</div>
+      <div class="ruta-title">Comunicación escrita</div>
+      <div class="ruta-desc">Escritura académica, argumentación y producción textual universitaria.</div>
+    </div>
+  </div>
+
+  <div id="nivelesSection" style="display:none">
+    <div class="sec-label"><span class="sec-num">2</span>Escoge un grupo por cada nivel (tres en total)</div>
+    <p style="font-size:13px;color:var(--ink-mid);margin-bottom:14px;line-height:1.6">Selecciona <strong>un grupo</strong> para cada uno de los tres niveles. Puedes elegir grupos distintos según tu disponibilidad horaria.</p>
+    <div id="nivelesRows"></div>
+  </div>
+
+  <div class="sec-divider"></div>
+
+  <div class="sec-label"><span class="sec-num">3</span>Diligencia tus datos personales</div>
+  <div style="margin-bottom:24px">
+    <div class="fields-grid">
+      <div class="field"><label for="nombre">Nombres</label><input type="text" id="nombre" placeholder="Ej. María Fernanda"><span class="err-msg" id="err-nombre">Campo requerido</span></div>
+      <div class="field"><label for="apellido">Apellidos</label><input type="text" id="apellido" placeholder="Ej. García Ruiz"><span class="err-msg" id="err-apellido">Campo requerido</span></div>
+      <div class="field"><label for="cedula">Número de cédula</label><input type="text" id="cedula" placeholder="Solo números, sin puntos"><span class="err-msg" id="err-cedula">Campo requerido</span></div>
+      <div class="field"><label for="email">Correo institucional</label><input type="email" id="email" placeholder="usuario@usantotomas.edu.co"><span class="err-msg" id="err-email">Ingresa un correo válido</span></div>
+      <div class="field full">
+        <label for="programa">Programa académico</label>
+        <select id="programa">
+          <option value="">— Selecciona tu programa —</option>
+          <option>Administración de Empresas Agropecuarias</option>
+          <option>Arquitectura</option>
+          <option>Arte y Cultura</option>
+          <option>Cultura Física, Deporte y Recreación</option>
+          <option>Contaduría Pública</option>
+          <option>Derecho</option>
+          <option>Ingeniería Ambiental</option>
+          <option>Ingeniería Civil</option>
+          <option>Ingeniería Industrial</option>
+          <option>Ingeniería Mecánica</option>
+          <option>Ingeniería de Sistemas</option>
+          <option>Ingeniería Mecatrónica</option>
+          <option>Lenguas Extranjeras</option>
+          <option>Negocios Internacionales</option>
+          <option>Psicología</option>
+        </select>
+        <span class="err-msg" id="err-programa">Selecciona un programa</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="summary-card" id="summaryCard">
+    <div class="sec-label" style="margin-bottom:10px;font-size:10px">Verifica tu inscripción antes de confirmar</div>
+    <div id="summaryContent"></div>
+    <div class="warn-box" style="margin-top:12px">⚠️ Al confirmar, tu inscripción quedará registrada de forma <strong>definitiva e irrevocable</strong>. No se permiten cambios de ruta ni de grupo.</div>
+  </div>
+
+  <div class="alert-bar" id="alertBar"></div>
+  <button class="submit-btn" id="submitBtn" onclick="handleSubmit()">Confirmar inscripción</button>
+</div>
+</div>
+
+<!-- ── CONFIRMACIÓN ── -->
+<div class="screen" id="screenSuccess">
+<div class="container">
+  <div class="success-wrap">
+    <div class="success-icon">✅</div>
+    <div class="success-h">¡Inscripción confirmada!</div>
+    <p class="success-sub">Tu inscripción quedó registrada. Descarga y conserva tu comprobante oficial.</p>
+    <div class="conf-card">
+      <div class="conf-header-block">
+        <div class="conf-logo-title">Universidad Santo Tomás · Villavicencio</div>
+        <div class="conf-logo-sub">Seminario de Humanidades y Pensamiento Tomista 2026-1 · Comprobante oficial</div>
+      </div>
+      <div id="confBody"></div>
+      <div class="conf-code-section">
+        <div style="font-size:11px;color:var(--ink-light);text-transform:uppercase;letter-spacing:.08em">Código de confirmación</div>
+        <div class="conf-code" id="confCode"></div>
+        <div style="font-size:11px;color:var(--ink-light)" id="confFecha"></div>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn-dl" onclick="downloadComprobante()">⬇ Descargar comprobante</button>
+      <button class="btn-ghost" onclick="resetForm()">Registrar otro docente</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ── LOGIN ADMIN ── -->
+<div class="screen" id="screenAdminLogin">
+<div class="container">
+  <div class="admin-login-wrap">
+    <div class="admin-card">
+      <h2>Panel de administración</h2>
+      <p>Acceso restringido. Ingresa tus credenciales.</p>
+      <div class="admin-field"><label for="adminPass">Contraseña</label><input type="password" id="adminPass" placeholder="Contraseña" onkeydown="if(event.key==='Enter')adminLogin()"></div>
+      <button class="admin-btn" onclick="adminLogin()">Ingresar</button>
+      <p class="admin-err" id="adminErr">Contraseña incorrecta</p>
+    </div>
+    <button class="back-link" onclick="goScreen('screenForm')">← Volver al formulario</button>
+  </div>
+</div>
+</div>
+
+<!-- ── PANEL ADMIN ── -->
+<div class="screen" id="screenAdmin">
+<div class="container">
+  <div class="admin-topbar">
+    <div>
+      <h2>Panel de administración</h2>
+      <p class="admin-note">Seminario de Humanidades 2026-1 · Los datos también se guardan en Excel Online (OneDrive)</p>
+    </div>
+    <button class="logout-btn" onclick="adminLogout()">Salir</button>
+  </div>
+  <div class="stats-row" id="statsRow"></div>
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchTab('tabInscritos')">Listado de inscritos</button>
+    <button class="tab-btn" onclick="switchTab('tabCupos')">Estado de cupos</button>
+  </div>
+  <div id="tabInscritos">
+    <div class="filter-row">
+      <input type="text" id="fQ" placeholder="Buscar nombre o cédula…" oninput="renderAdmin()">
+      <select id="fRuta" onchange="renderAdmin()"><option value="">Todas las rutas</option><option value="1">Ruta 1 · Lectura crítica</option><option value="2">Ruta 2 · Comunicación escrita</option></select>
+      <select id="fProg" onchange="renderAdmin()">
+        <option value="">Todos los programas</option>
+        <option>Administración de Empresas Agropecuarias</option><option>Arquitectura</option><option>Arte y Cultura</option><option>Cultura Física, Deporte y Recreación</option><option>Contaduría Pública</option><option>Derecho</option><option>Ingeniería Ambiental</option><option>Ingeniería Civil</option><option>Ingeniería Industrial</option><option>Ingeniería Mecánica</option><option>Ingeniería de Sistemas</option><option>Ingeniería Mecatrónica</option><option>Lenguas Extranjeras</option><option>Negocios Internacionales</option><option>Psicología</option>
+      </select>
+    </div>
+    <p style="font-size:12px;color:var(--ink-light);margin-bottom:8px" id="adminCount"></p>
+    <div class="table-wrap"><table class="list"><thead><tr><th>#</th><th>Nombre</th><th>Cédula</th><th>Programa</th><th>Ruta</th><th>N1</th><th>N2</th><th>N3</th><th>Código</th></tr></thead><tbody id="adminTbody"></tbody></table></div>
+  </div>
+  <div id="tabCupos" style="display:none"><div class="cupos-grid" id="cuposGrid"></div></div>
+</div>
+</div>
+
+<script>
+// ══════════════════════════════════════════════════════
+//  CONFIGURACIÓN — edita estas líneas antes de publicar
+// ══════════════════════════════════════════════════════
+const POWER_AUTOMATE_URL = 'https://default99c674cac0c7490aae8f16172636f3.1b.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/41f7ba445f004c25a84a3b91fbe2bbd8/triggers/manual/paths/invoke?api-version=1'; // ← URL del trigger HTTP de Power Automate
+const ADMIN_PASS = 'usta2026';                               // ← cambia por una contraseña segura
+// ══════════════════════════════════════════════════════
+
+const MAX = 20, GROUPS = ['A','B','C','D','E'];
+const NIVELES = [
+  { num:1, dia:'Martes 7 de junio de 2026',    hora:'10:00 a.m. – 12:00 m.' },
+  { num:2, dia:'Miércoles 8 de junio de 2026', hora:'8:30 a.m. – 10:00 a.m.' },
+  { num:3, dia:'Jueves 9 de junio de 2026',    hora:'10:30 a.m. – 12:00 m.' },
+];
+
+let cupos = {}, registros = {}, regList = [], lastConf = null;
+NIVELES.forEach(n => GROUPS.forEach(g => { cupos[`${n.num}-${g}`] = 0; }));
+let selRuta = null, selGrp = {1:null,2:null,3:null};
+
+function goScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
+}
+function toggleGuide() {
+  document.getElementById('guideBody').classList.toggle('open');
+  document.getElementById('guideChevron').classList.toggle('open');
+}
+const left = k => MAX - cupos[k];
+const bc   = k => { const l=left(k); return l<=0?'badge-full':l<=5?'badge-low':'badge-ok'; };
+const cl   = k => { const l=left(k); return l<=0?'Lleno':`${l} cupo${l===1?'':'s'}`; };
+
+function selectRuta(r) {
+  selRuta=r; selGrp={1:null,2:null,3:null};
+  document.querySelectorAll('.ruta-card').forEach(c=>c.classList.toggle('selected',parseInt(c.dataset.ruta)===r));
+  document.getElementById('nivelesSection').style.display='block';
+  renderNiveles(); updateSummary();
+}
+function renderNiveles() {
+  document.getElementById('nivelesRows').innerHTML = NIVELES.map(n=>`
+    <div class="nivel-block">
+      <div class="nivel-header">
+        <span class="nivel-pill">Nivel ${n.num}</span>
+        <span class="nivel-fecha">${n.dia}</span>
+        <span class="nivel-hora">⏰ ${n.hora}</span>
+      </div>
+      <div class="grupos-row">
+        ${GROUPS.map(g=>{
+          const k=`${n.num}-${g}`,full=left(k)<=0,sel=selGrp[n.num]===g;
+          return `<button class="grupo-btn${sel?' selected':''}${full?' ':''}" onclick="${full?'':`pickGroup(${n.num},'${g}')`}" ${full?'disabled':''}>
+            <span class="g-label">Gr. ${g}</span>
+            <span class="g-cupos ${bc(k)}">${cl(k)}</span>
+            ${sel?'<span class="g-check">✓</span>':''}
+          </button>`;
+        }).join('')}
+      </div>
+    </div>`).join('');
+}
+function pickGroup(n,g){selGrp[n]=g;renderNiveles();updateSummary();}
+function updateSummary(){
+  const card=document.getElementById('summaryCard');
+  const all=selGrp[1]&&selGrp[2]&&selGrp[3];
+  if(!selRuta||!all){card.classList.remove('visible');return;}
+  const rn=selRuta===1?'Lectura crítica':'Comunicación escrita';
+  document.getElementById('summaryContent').innerHTML=`
+    <div class="sum-row"><span>Ruta</span><span>Ruta ${selRuta} · ${rn}</span></div>
+    ${NIVELES.map(n=>`<div class="sum-row"><span>Nivel ${n.num} · ${n.dia}</span><span>Grupo ${selGrp[n.num]} · ${n.hora}</span></div>`).join('')}`;
+  card.classList.add('visible');
+}
+function showAlert(msg){
+  const el=document.getElementById('alertBar');
+  el.textContent=msg;el.classList.add('on');
+  setTimeout(()=>el.classList.remove('on'),6000);
+}
+function validateForm(){
+  let ok=true;
+  [{id:'nombre',err:'err-nombre',fn:v=>v.trim().length>1},
+   {id:'apellido',err:'err-apellido',fn:v=>v.trim().length>1},
+   {id:'cedula',err:'err-cedula',fn:v=>v.trim().length>3},
+   {id:'email',err:'err-email',fn:v=>/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim())},
+   {id:'programa',err:'err-programa',fn:v=>v!==''}
+  ].forEach(f=>{
+    const valid=f.fn(document.getElementById(f.id).value);
+    document.getElementById(f.err).style.display=valid?'none':'block';
+    if(!valid)ok=false;
+  });
+  return ok;
+}
+async function handleSubmit(){
+  if(!selRuta){showAlert('Por favor selecciona una ruta de aprendizaje.');return;}
+  if(!selGrp[1]||!selGrp[2]||!selGrp[3]){showAlert('Debes escoger un grupo para cada nivel.');return;}
+  for(const n of NIVELES){const k=`${n.num}-${selGrp[n.num]}`;if(left(k)<=0){showAlert(`El grupo ${selGrp[n.num]} del Nivel ${n.num} se llenó. Elige otro.`);renderNiveles();return;}}
+  if(!validateForm())return;
+  const ced=document.getElementById('cedula').value.trim();
+  if(registros[ced]){showAlert('Ya existe una inscripción con este número de cédula.');return;}
+  const nom=document.getElementById('nombre').value.trim();
+  const ape=document.getElementById('apellido').value.trim();
+  const eml=document.getElementById('email').value.trim();
+  const prg=document.getElementById('programa').value;
+  const rn=selRuta===1?'Lectura crítica':'Comunicación escrita';
+  const code='USTA-'+Math.random().toString(36).substring(2,7).toUpperCase();
+  const fecha=new Date().toLocaleString('es-CO');
+  const payload={cedula:ced,nombre:nom,apellido:ape,email:eml,programa:prg,ruta:selRuta,rutaNombre:rn,grupo1:selGrp[1],grupo2:selGrp[2],grupo3:selGrp[3],code,fecha};
+
+  const btn=document.getElementById('submitBtn');
+  btn.disabled=true; btn.classList.add('loading');
+  btn.innerHTML='<span class="spinner"></span>Registrando…';
+
+  try {
+    if(POWER_AUTOMATE_URL && POWER_AUTOMATE_URL!=='TU_URL_DE_POWER_AUTOMATE_AQUI'){
+      await fetch(POWER_AUTOMATE_URL,{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify(payload)
+      });
+    }
+  } catch(e){ console.warn('Error enviando a Power Automate:',e); }
+
+  NIVELES.forEach(n=>{cupos[`${n.num}-${selGrp[n.num]}`]++;});
+  registros[ced]=payload; regList.push(payload); lastConf=payload;
+
+  document.getElementById('confBody').innerHTML=`
+    <div class="conf-row"><span>Docente</span><span>${nom} ${ape}</span></div>
+    <div class="conf-row"><span>Cédula</span><span>${ced}</span></div>
+    <div class="conf-row"><span>Correo</span><span>${eml}</span></div>
+    <div class="conf-row"><span>Programa</span><span>${prg}</span></div>
+    <div class="conf-row"><span>Ruta</span><span>Ruta ${selRuta} · ${rn}</span></div>
+    ${NIVELES.map(n=>`<div class="conf-row"><span>Nivel ${n.num} · ${n.dia}</span><span><strong>Grupo ${selGrp[n.num]}</strong> · ${n.hora}</span></div>`).join('')}`;
+  document.getElementById('confCode').textContent=code;
+  document.getElementById('confFecha').textContent='Registrado el '+fecha;
+  btn.disabled=false; btn.classList.remove('loading'); btn.innerHTML='Confirmar inscripción';
+  goScreen('screenSuccess');
+}
+function downloadComprobante(){
+  if(!lastConf)return;
+  const r=lastConf;
+  const html=`<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><title>Comprobante ${r.code}</title>
+  <style>body{font-family:Georgia,serif;max-width:560px;margin:50px auto;font-size:13px;color:#1A1714;padding:0 20px;}
+  .logo{font-size:18px;font-weight:bold;}.sub{font-size:12px;color:#666;margin-bottom:20px;}
+  h1{font-size:22px;font-weight:300;border-bottom:2px solid #8B6914;padding-bottom:10px;margin-bottom:20px;}
+  table{width:100%;border-collapse:collapse;margin-bottom:20px;}
+  td{padding:7px 0;border-bottom:1px solid #E8E2D8;font-size:13px;}td:first-child{color:#666;width:42%;}td:last-child{font-weight:500;}
+  .code-box{text-align:center;background:#FBF5E6;border:1px solid #C49A2A;border-radius:6px;padding:18px;margin-top:20px;}
+  .code-lbl{font-size:11px;color:#8B6914;text-transform:uppercase;letter-spacing:.1em;}
+  .code{font-size:28px;font-weight:bold;color:#8B6914;letter-spacing:.1em;margin:6px 0;}
+  .footer{font-size:11px;color:#999;border-top:1px solid #E8E2D8;padding-top:14px;margin-top:20px;line-height:1.6;}
+  </style></head><body>
+  <div class="logo">Universidad Santo Tomás</div><div class="sub">Seccional Villavicencio</div>
+  <h1>Comprobante de inscripción</h1>
+  <table>
+    <tr><td>Seminario</td><td>Humanidades y Pensamiento Tomista 2026-1</td></tr>
+    <tr><td>Docente</td><td>${r.nombre} ${r.apellido}</td></tr>
+    <tr><td>Cédula</td><td>${r.cedula}</td></tr>
+    <tr><td>Correo institucional</td><td>${r.email}</td></tr>
+    <tr><td>Programa académico</td><td>${r.programa}</td></tr>
+    <tr><td>Ruta seleccionada</td><td>Ruta ${r.ruta} · ${r.rutaNombre}</td></tr>
+    <tr><td>Nivel 1 · Mar. 7 jun.</td><td>Grupo ${r.grupo1} · 10:00 a.m. – 12:00 m.</td></tr>
+    <tr><td>Nivel 2 · Mié. 8 jun.</td><td>Grupo ${r.grupo2} · 8:30 a.m. – 10:00 a.m.</td></tr>
+    <tr><td>Nivel 3 · Jue. 9 jun.</td><td>Grupo ${r.grupo3} · 10:30 a.m. – 12:00 m.</td></tr>
+  </table>
+  <div class="code-box"><div class="code-lbl">Código de confirmación</div><div class="code">${r.code}</div></div>
+  <div class="footer">Registrado el ${r.fecha}<br>Comprobante oficial — Seminario de Humanidades y Pensamiento Tomista 2026-1 · USTA Villavicencio. Consérvelo para el día del evento.</div>
+  </body></html>`;
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([html],{type:'text/html'}));
+  a.download=`Comprobante_${r.code}.html`; a.click();
+}
+function resetForm(){
+  selRuta=null;selGrp={1:null,2:null,3:null};
+  ['nombre','apellido','cedula','email'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('programa').value='';
+  document.querySelectorAll('.err-msg').forEach(e=>e.style.display='none');
+  document.querySelectorAll('.ruta-card').forEach(c=>c.classList.remove('selected'));
+  document.getElementById('nivelesSection').style.display='none';
+  document.getElementById('summaryCard').classList.remove('visible');
+  goScreen('screenForm');
+}
+function adminLogin(){
+  if(document.getElementById('adminPass').value===ADMIN_PASS){
+    document.getElementById('adminErr').style.display='none';
+    renderAdminPanel(); goScreen('screenAdmin');
+  } else { document.getElementById('adminErr').style.display='block'; }
+}
+function adminLogout(){document.getElementById('adminPass').value='';goScreen('screenForm');}
+function switchTab(tab){
+  document.getElementById('tabInscritos').style.display=tab==='tabInscritos'?'block':'none';
+  document.getElementById('tabCupos').style.display=tab==='tabCupos'?'block':'none';
+  document.querySelectorAll('.tab-btn').forEach((b,i)=>b.classList.toggle('active',(i===0&&tab==='tabInscritos')||(i===1&&tab==='tabCupos')));
+  if(tab==='tabCupos')renderCupos();
+}
+function renderAdminPanel(){
+  const t=regList.length,r1=regList.filter(r=>r.ruta===1).length,r2=regList.filter(r=>r.ruta===2).length;
+  document.getElementById('statsRow').innerHTML=`
+    <div class="stat-card"><div class="stat-label">Total inscritos</div><div class="stat-val">${t}</div></div>
+    <div class="stat-card"><div class="stat-label">Ruta 1 · Lectura crítica</div><div class="stat-val">${r1}</div></div>
+    <div class="stat-card"><div class="stat-label">Ruta 2 · Comunicación escrita</div><div class="stat-val">${r2}</div></div>`;
+  renderAdmin();
+}
+function renderAdmin(){
+  const q=document.getElementById('fQ').value.toLowerCase();
+  const fr=document.getElementById('fRuta').value;
+  const fp=document.getElementById('fProg').value;
+  let list=regList.filter(r=>{
+    const mq=!q||`${r.nombre} ${r.apellido} ${r.cedula}`.toLowerCase().includes(q);
+    return mq&&(!fr||String(r.ruta)===fr)&&(!fp||r.programa===fp);
+  });
+  const tb=document.getElementById('adminTbody');
+  if(!list.length){tb.innerHTML=`<tr><td colspan="9"><div class="empty-st">No hay inscritos con estos filtros.</div></td></tr>`;}
+  else{tb.innerHTML=list.map((r,i)=>`<tr>
+    <td style="color:var(--ink-light)">${i+1}</td>
+    <td>${r.nombre} ${r.apellido}</td>
+    <td style="font-family:monospace;font-size:11px">${r.cedula}</td>
+    <td>${r.programa}</td>
+    <td><span class="${r.ruta===1?'badge-r1':'badge-r2'}">Ruta ${r.ruta}</span></td>
+    <td style="text-align:center">Gr.${r.grupo1}</td>
+    <td style="text-align:center">Gr.${r.grupo2}</td>
+    <td style="text-align:center">Gr.${r.grupo3}</td>
+    <td style="font-family:monospace;font-size:10px;color:var(--ink-light)">${r.code}</td>
+  </tr>`).join('');}
+  document.getElementById('adminCount').textContent=`Mostrando ${list.length} de ${regList.length} inscrito${regList.length!==1?'s':''}.`;
+}
+function renderCupos(){
+  document.getElementById('cuposGrid').innerHTML=NIVELES.map(n=>`
+    <div class="cupos-block">
+      <div class="cupos-block-hdr">Nivel ${n.num} · ${n.dia}</div>
+      ${GROUPS.map(g=>{const k=`${n.num}-${g}`,used=cupos[k],pct=Math.round(used/MAX*100),col=used>=MAX?'#7A2020':used>=MAX*.8?'#7A5010':'#1A5C1E';
+        return `<div class="cupos-row"><span>Grupo ${g}</span><span><span class="cupos-bar-wrap"><span class="cupos-bar-fill" style="width:${pct}%;background:${col}"></span></span><span class="count-lbl">${used}/${MAX}</span></span></div>`;
+      }).join('')}
+    </div>`).join('');
+}
+</script>
+</body>
+</html>
