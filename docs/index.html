@@ -232,7 +232,7 @@
         <div class="g-num">1</div>
         <div>
           <div class="g-title">¿Qué es este seminario?</div>
-          <div class="g-text">El <strong>Seminario de Humanidades y Pensamiento Tomista 2026-1</strong> es un espacio académico obligatorio para todos los docentes de la Universidad Santo Tomás, seccional Villavicencio. Su propósito es fortalecer las competencias docentes en lectura académica y producción escrita desde una perspectiva humanista y tomista.</div>
+          <div class="g-text">El <strong>Seminario de Humanidades y Pensamiento Tomista 2026-1</strong> es un espacio académico para todos los docentes de la Universidad Santo Tomás, seccional Villavicencio. Su propósito es fortalecer las competencias docentes en lectura crítica y producción escrita desde una perspectiva humanista y tomista.</div>
         </div>
       </div>
       <div class="g-divider"></div>
@@ -242,8 +242,8 @@
           <div class="g-title">Las dos rutas: escoge solo una</div>
           <div class="g-text">El seminario ofrece <strong>dos rutas de aprendizaje</strong>. Debes escoger <strong>una sola ruta</strong> y cursarla completa:
             <ul>
-              <li><strong>Ruta 1 — Lectura crítica:</strong> análisis, interpretación y evaluación de textos académicos y filosóficos en clave tomista.</li>
-              <li><strong>Ruta 2 — Comunicación escrita:</strong> procesos de escritura académica, argumentación y producción textual universitaria.</li>
+              <li><strong>Ruta 1 — Lectura crítica:</strong> análisis, interpretación y evaluación de continuos y discontinuos.</li>
+              <li><strong>Ruta 2 — Comunicación escrita:</strong> procesos de argumentación y producción textual.</li>
             </ul>
             <div class="warn-box">⚠️ <strong>Importante:</strong> una vez confirmes tu inscripción, <strong>no podrás cambiar de ruta</strong>. Reflexiona bien antes de elegir.</div>
           </div>
@@ -258,9 +258,9 @@
             <table class="g-table">
               <thead><tr><th>Nivel</th><th>Fecha</th><th>Horario</th></tr></thead>
               <tbody>
-                <tr><td><strong>Nivel 1</strong></td><td>Martes 7 de junio de 2026</td><td>10:00 a.m. – 12:00 m.</td></tr>
-                <tr><td><strong>Nivel 2</strong></td><td>Miércoles 8 de junio de 2026</td><td>8:30 a.m. – 10:00 a.m.</td></tr>
-                <tr><td><strong>Nivel 3</strong></td><td>Jueves 9 de junio de 2026</td><td>10:30 a.m. – 12:00 m.</td></tr>
+                <tr><td><strong>Nivel 1</strong></td><td>Martes 7 de julio de 2026</td><td>10:30 a.m. – 12:00 m.</td></tr>
+                <tr><td><strong>Nivel 2</strong></td><td>Miércoles 8 de julio de 2026</td><td>8:30 a.m. – 10:00 a.m.</td></tr>
+                <tr><td><strong>Nivel 3</strong></td><td>Miércoles 8 de julio de 2026</td><td>10:30 a.m. – 12:00 m.</td></tr>
               </tbody>
             </table>
           </div>
@@ -298,13 +298,13 @@
       <div class="ruta-icon">📚</div>
       <div class="ruta-num">Ruta 1</div>
       <div class="ruta-title">Lectura crítica</div>
-      <div class="ruta-desc">Análisis, interpretación y evaluación de textos académicos y filosóficos.</div>
+      <div class="ruta-desc">Análisis, interpretación y evaluación de continuos y discontinuos.</div>
     </div>
     <div class="ruta-card" data-ruta="2" onclick="selectRuta(2)">
       <div class="ruta-icon">✍️</div>
       <div class="ruta-num">Ruta 2</div>
       <div class="ruta-title">Comunicación escrita</div>
-      <div class="ruta-desc">Escritura académica, argumentación y producción textual universitaria.</div>
+      <div class="ruta-desc">Procesos de argumentación y producción textual.</div>
     </div>
   </div>
 
@@ -437,15 +437,15 @@
 // ══════════════════════════════════════════════════════
 //  CONFIGURACIÓN — edita estas líneas antes de publicar
 // ══════════════════════════════════════════════════════
-const POWER_AUTOMATE_URL = 'https://default99c674cac0c7490aae8f16172636f3.1b.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/41f7ba445f004c25a84a3b91fbe2bbd8/triggers/manual/paths/invoke?api-version=1'; // ← URL del trigger HTTP de Power Automate
-const ADMIN_PASS = 'usta2026';                               // ← cambia por una contraseña segura
+const POWER_AUTOMATE_URL = 'TU_URL_DE_POWER_AUTOMATE_AQUI'; // ← URL del trigger HTTP de Power Automate
+const ADMIN_PASS = 'SHPT_2026-1';                            // ← cambia por una contraseña segura
 // ══════════════════════════════════════════════════════
 
 const MAX = 20, GROUPS = ['A','B','C','D','E'];
 const NIVELES = [
-  { num:1, dia:'Martes 7 de junio de 2026',    hora:'10:00 a.m. – 12:00 m.' },
-  { num:2, dia:'Miércoles 8 de junio de 2026', hora:'8:30 a.m. – 10:00 a.m.' },
-  { num:3, dia:'Jueves 9 de junio de 2026',    hora:'10:30 a.m. – 12:00 m.' },
+  { num:1, dia:'Martes 7 de julio de 2026',      hora:'10:30 a.m. – 12:00 m.' },
+  { num:2, dia:'Miércoles 8 de julio de 2026',   hora:'8:30 a.m. – 10:00 a.m.' },
+  { num:3, dia:'Miércoles 8 de julio de 2026',   hora:'10:30 a.m. – 12:00 m.' },
 ];
 
 let cupos = {}, registros = {}, regList = [], lastConf = null;
@@ -589,9 +589,9 @@ function downloadComprobante(){
     <tr><td>Correo institucional</td><td>${r.email}</td></tr>
     <tr><td>Programa académico</td><td>${r.programa}</td></tr>
     <tr><td>Ruta seleccionada</td><td>Ruta ${r.ruta} · ${r.rutaNombre}</td></tr>
-    <tr><td>Nivel 1 · Mar. 7 jun.</td><td>Grupo ${r.grupo1} · 10:00 a.m. – 12:00 m.</td></tr>
-    <tr><td>Nivel 2 · Mié. 8 jun.</td><td>Grupo ${r.grupo2} · 8:30 a.m. – 10:00 a.m.</td></tr>
-    <tr><td>Nivel 3 · Jue. 9 jun.</td><td>Grupo ${r.grupo3} · 10:30 a.m. – 12:00 m.</td></tr>
+    <tr><td>Nivel 1 · Mar. 7 jul.</td><td>Grupo ${r.grupo1} · 10:30 a.m. – 12:00 m.</td></tr>
+    <tr><td>Nivel 2 · Mié. 8 jul.</td><td>Grupo ${r.grupo2} · 8:30 a.m. – 10:00 a.m.</td></tr>
+    <tr><td>Nivel 3 · Mié. 8 jul.</td><td>Grupo ${r.grupo3} · 10:30 a.m. – 12:00 m.</td></tr>
   </table>
   <div class="code-box"><div class="code-lbl">Código de confirmación</div><div class="code">${r.code}</div></div>
   <div class="footer">Registrado el ${r.fecha}<br>Comprobante oficial — Seminario de Humanidades y Pensamiento Tomista 2026-1 · USTA Villavicencio. Consérvelo para el día del evento.</div>
