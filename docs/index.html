@@ -9,49 +9,50 @@
   <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
     :root {
-      --cream: #F5F0E8;
-      --cream-dark: #EDE7D9;
-      --ink: #1A1714;
-      --ink-mid: #4A4540;
-      --ink-light: #8A837A;
-      --gold: #8B6914;
-      --gold-light: #C49A2A;
-      --gold-bg: #FBF5E6;
-      --burgundy: #6B1E2E;
-      --teal: #1B5C52;
-      --teal-light: #E6F2F0;
+      --cream: #E8EEF8;
+      --cream-dark: #D0DCEE;
+      --ink: #0A1F5C;
+      --ink-mid: #1E3A7A;
+      --ink-light: #6B82B0;
+      --gold: #1A6BB5;
+      --gold-light: #2E8DD4;
+      --gold-bg: #EAF2FB;
+      --burgundy: #0D3580;
+      --teal: #1A6BB5;
+      --teal-light: #E0EDF9;
       --red-soft: #FBEDED;
       --red-text: #7A2020;
       --green-soft: #EBF5EC;
       --green-text: #1A5C1E;
       --amber-soft: #FBF3E0;
       --amber-text: #7A5010;
-      --border: rgba(26,23,20,0.12);
-      --border-mid: rgba(26,23,20,0.2);
+      --border: rgba(10,31,92,0.12);
+      --border-mid: rgba(10,31,92,0.25);
       --radius: 6px;
       --radius-lg: 12px;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--ink); min-height: 100vh; }
+    body { font-family: 'DM Sans', sans-serif; background: #06153A; color: var(--ink); min-height: 100vh; }
 
-    .site-header { background: var(--ink); padding: 18px 24px; display: flex; align-items: center; gap: 16px; }
-    .site-header-logo { font-family: 'Crimson Pro', serif; font-size: 15px; color: var(--cream); line-height: 1.3; opacity: .9; }
+    .site-header { background: #061444; padding: 18px 24px; display: flex; align-items: center; gap: 16px; border-bottom: 2px solid #1A6BB5; }
+    .site-header-logo { font-family: 'Crimson Pro', serif; font-size: 15px; color: white; line-height: 1.3; }
     .site-header-logo strong { display: block; font-weight: 600; font-size: 16px; }
     .header-divider { width: 1px; height: 32px; background: rgba(255,255,255,.2); }
-    .site-header-title { font-family: 'Crimson Pro', serif; font-size: 17px; color: rgba(255,255,255,.75); font-weight: 300; font-style: italic; }
+    .site-header-title { font-family: 'Crimson Pro', serif; font-size: 17px; color: rgba(255,255,255,.8); font-weight: 300; font-style: italic; }
     .header-admin-link { margin-left: auto; font-size: 12px; color: rgba(255,255,255,.4); cursor: pointer; background: none; border: none; text-decoration: underline; }
     .header-admin-link:hover { color: rgba(255,255,255,.7); }
 
-    .container { max-width: 680px; margin: 0 auto; padding: 32px 20px 60px; }
+    .container { max-width: 680px; margin: 0 auto; padding: 32px 20px 60px; background: white; min-height: calc(100vh - 60px); }
     .screen { display: none; }
     .screen.active { display: block; }
 
-    .hero { margin-bottom: 32px; }
+    .hero { margin-bottom: 32px; padding: 28px 0 24px; border-bottom: 1px solid var(--border); }
     .hero-eyebrow { font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); font-weight: 500; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
     .hero-eyebrow::before { content: ''; display: block; width: 24px; height: 1px; background: var(--gold); }
-    .hero h1 { font-family: 'Crimson Pro', serif; font-size: 38px; font-weight: 300; line-height: 1.2; margin-bottom: 10px; }
+    .hero h1 { font-family: 'Crimson Pro', serif; font-size: 38px; font-weight: 300; line-height: 1.2; margin-bottom: 10px; color: var(--ink); }
     .hero h1 em { font-style: italic; color: var(--gold); }
     .hero-sub { font-size: 16px; color: var(--ink-mid); line-height: 1.6; }
+    .hero-lema { font-family: 'Crimson Pro', serif; font-size: 20px; font-style: italic; font-weight: 600; color: #1A6BB5; letter-spacing: .01em; }
 
     .guide-box { border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; margin-bottom: 28px; background: white; }
     .guide-toggle { width: 100%; background: var(--gold-bg); border: none; padding: 16px 18px; display: flex; align-items: center; gap: 10px; cursor: pointer; text-align: left; }
@@ -86,30 +87,33 @@
     .rutas-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 28px; }
     .ruta-card { border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px; cursor: pointer; background: white; transition: border-color .15s; position: relative; }
     .ruta-card:hover { border-color: var(--gold-light); }
-    .ruta-card.selected { border: 2px solid var(--gold); background: var(--gold-bg); }
-    .ruta-card.selected::after { content: '✓'; position: absolute; top: 12px; right: 14px; font-size: 15px; color: var(--gold); font-weight: 600; }
+    .ruta-card.selected { border: 2px solid #1A6BB5; background: #EAF2FB; }
+    .ruta-card.selected::after { content: '✓'; position: absolute; top: 12px; right: 14px; font-size: 15px; color: #1A6BB5; font-weight: 600; }
     .ruta-icon { font-size: 26px; color: var(--ink-light); margin-bottom: 10px; }
-    .ruta-card.selected .ruta-icon { color: var(--gold); }
+    .ruta-card.selected .ruta-icon { color: #1A6BB5; }
     .ruta-num { font-size: 12px; color: var(--ink-light); margin-bottom: 4px; letter-spacing: .05em; text-transform: uppercase; }
-    .ruta-card.selected .ruta-num { color: var(--gold); }
+    .ruta-card.selected .ruta-num { color: #1A6BB5; }
     .ruta-title { font-family: 'Crimson Pro', serif; font-size: 20px; font-weight: 600; color: var(--ink); margin-bottom: 6px; }
     .ruta-desc { font-size: 14px; color: var(--ink-mid); line-height: 1.6; }
 
     .nivel-block { border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; margin-bottom: 12px; background: white; }
-    .nivel-header { background: var(--cream-dark); padding: 13px 16px; display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
-    .nivel-pill { font-size: 12px; font-weight: 500; background: var(--ink); color: var(--cream); border-radius: 20px; padding: 3px 12px; }
-    .nivel-fecha { font-size: 15px; font-weight: 500; }
-    .nivel-hora { font-size: 14px; color: var(--ink-mid); margin-left: auto; }
+    .nivel-header { background: #0A1F5C; padding: 13px 16px; display: flex; align-items: center; flex-wrap: wrap; gap: 10px; }
+    .nivel-pill { font-size: 12px; font-weight: 500; background: #1A6BB5; color: white; border-radius: 20px; padding: 3px 12px; flex-shrink: 0; }
+    .nivel-info { display: flex; flex-direction: column; gap: 3px; }
+    .nivel-fecha { font-size: 15px; font-weight: 500; color: white; }
+    .nivel-hora-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.2); border-radius: 20px; padding: 3px 12px; font-size: 13px; color: rgba(255,255,255,.9); font-weight: 500; width: fit-content; }
     .grupos-row { display: grid; grid-template-columns: repeat(5,1fr); }
-    .grupo-btn { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 14px 6px; gap: 6px; background: white; border: none; border-right: 1px solid var(--border); border-top: 1px solid var(--border); cursor: pointer; transition: background .12s; }
+    .grupo-btn { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 12px 6px; gap: 4px; background: white; border: none; border-right: 1px solid var(--border); border-top: 1px solid var(--border); cursor: pointer; transition: background .12s; }
     .grupo-btn:last-child { border-right: none; }
     .grupo-btn:hover:not([disabled]) { background: var(--cream); }
-    .grupo-btn.selected { background: var(--gold-bg); }
+    .grupo-btn.selected { background: #EAF2FB; }
     .grupo-btn[disabled] { opacity: .35; cursor: not-allowed; background: var(--cream-dark); }
     .g-label { font-size: 15px; font-weight: 500; }
-    .grupo-btn.selected .g-label { color: var(--gold); }
-    .g-cupos { font-size: 12px; border-radius: 20px; padding: 3px 8px; white-space: nowrap; }
-    .g-check { font-size: 14px; color: var(--gold); }
+    .grupo-btn.selected .g-label { color: #0A1F5C; }
+    .g-cupos { font-size: 11px; border-radius: 20px; padding: 2px 7px; white-space: nowrap; }
+    .g-salon { font-size: 11px; color: var(--ink-light); text-align: center; line-height: 1.3; }
+    .grupo-btn.selected .g-salon { color: #1A6BB5; }
+    .g-check { font-size: 14px; color: #1A6BB5; }
 
     .fields-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
     .field { display: flex; flex-direction: column; gap: 6px; }
@@ -129,8 +133,8 @@
     .alert-bar { background: var(--red-soft); border: 1px solid rgba(122,32,32,.2); border-radius: var(--radius); padding: 12px 16px; font-size: 15px; color: var(--red-text); margin-bottom: 14px; display: none; }
     .alert-bar.on { display: block; }
 
-    .submit-btn { width: 100%; padding: 15px; background: var(--ink); color: var(--cream); border: none; border-radius: var(--radius); font-family: 'DM Sans', sans-serif; font-size: 16px; font-weight: 500; cursor: pointer; letter-spacing: .02em; transition: background .15s; }
-    .submit-btn:hover { background: var(--burgundy); }
+    .submit-btn { width: 100%; padding: 15px; background: #0A1F5C; color: white; border: none; border-radius: var(--radius); font-family: 'DM Sans', sans-serif; font-size: 16px; font-weight: 500; cursor: pointer; letter-spacing: .02em; transition: background .15s; }
+    .submit-btn:hover { background: #1A6BB5; }
     .submit-btn.loading { opacity: .6; cursor: wait; }
 
     .success-wrap { text-align: center; padding: 20px 0; }
@@ -147,8 +151,8 @@
     .conf-code-section { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); text-align: center; }
     .conf-code { font-family: 'Crimson Pro', serif; font-size: 30px; font-weight: 600; color: var(--gold); letter-spacing: .08em; margin: 6px 0; }
     .btn-row { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
-    .btn-dl { background: var(--teal); color: white; border: none; border-radius: var(--radius); padding: 12px 24px; font-size: 15px; font-weight: 500; cursor: pointer; display: flex; align-items: center; gap: 7px; font-family: 'DM Sans', sans-serif; }
-    .btn-dl:hover { background: #134840; }
+    .btn-dl { background: #0A1F5C; color: white; border: none; border-radius: var(--radius); padding: 12px 24px; font-size: 15px; font-weight: 500; cursor: pointer; display: flex; align-items: center; gap: 7px; font-family: 'DM Sans', sans-serif; }
+    .btn-dl:hover { background: #1A6BB5; }
     .btn-ghost { background: white; color: var(--ink); border: 1px solid var(--border-mid); border-radius: var(--radius); padding: 12px 24px; font-size: 15px; cursor: pointer; font-family: 'DM Sans', sans-serif; }
     .btn-ghost:hover { background: var(--cream); }
 
@@ -157,8 +161,8 @@
     .admin-card h2 { font-family: 'Crimson Pro', serif; font-size: 24px; font-weight: 300; margin-bottom: 6px; }
     .admin-card p { font-size: 15px; color: var(--ink-mid); margin-bottom: 20px; }
     .admin-field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
-    .admin-btn { width: 100%; padding: 13px; background: var(--ink); color: var(--cream); border: none; border-radius: var(--radius); font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500; cursor: pointer; margin-top: 4px; }
-    .admin-btn:hover { background: var(--burgundy); }
+    .admin-btn { width: 100%; padding: 13px; background: #0A1F5C; color: white; border: none; border-radius: var(--radius); font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500; cursor: pointer; margin-top: 4px; }
+    .admin-btn:hover { background: #1A6BB5; }
     .admin-err { font-size: 13px; color: var(--red-text); text-align: center; margin-top: 8px; display: none; }
     .back-link { font-size: 14px; color: var(--ink-light); cursor: pointer; background: none; border: none; text-decoration: underline; margin-top: 14px; display: block; text-align: center; }
 
@@ -172,7 +176,7 @@
     .tab-bar { display: flex; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; margin-bottom: 20px; }
     .tab-btn { flex: 1; padding: 11px; font-size: 14px; background: white; border: none; border-right: 1px solid var(--border); cursor: pointer; color: var(--ink-mid); font-family: 'DM Sans', sans-serif; }
     .tab-btn:last-child { border-right: none; }
-    .tab-btn.active { background: var(--ink); color: var(--cream); }
+    .tab-btn.active { background: #0A1F5C; color: white; }
     .filter-row { display: flex; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
     .filter-row input, .filter-row select { font-size: 14px; flex: 1; min-width: 140px; }
     .table-wrap { border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; overflow-x: auto; margin-bottom: 10px; background: white; }
@@ -192,11 +196,30 @@
     .cupos-bar-wrap { width: 44px; height: 5px; background: var(--cream-dark); border-radius: 2px; overflow: hidden; display: inline-block; vertical-align: middle; margin-right: 6px; }
     .cupos-bar-fill { height: 100%; border-radius: 2px; }
     .count-lbl { font-size: 12px; color: var(--ink-light); }
+    /* ── BLOQUES INTEGRADOS ── */
+    .flow-block { margin-bottom: 8px; }
+    .flow-explain { display: flex; gap: 16px; margin-bottom: 20px; }
+    .warn-inline { background: var(--amber-soft); border: 1px solid rgba(122,80,16,.2); border-radius: var(--radius); padding: 10px 14px; font-size: 14px; color: var(--amber-text); margin-top: 12px; line-height: 1.6; display: block; }
+    .flow-explain-body { flex: 1; }
+    .flow-title { font-family: 'Crimson Pro', serif; font-size: 20px; font-weight: 600; color: var(--ink); margin-bottom: 8px; }
+    .flow-text { font-size: 15px; color: var(--ink-mid); line-height: 1.7; }
+    .flow-text ul { padding-left: 18px; margin-top: 8px; }
+    .flow-text li { margin-bottom: 5px; }
+    .flow-text strong { color: var(--ink); font-weight: 500; }
+    .flow-action { margin-left: 48px; margin-bottom: 4px; }
+    .flow-invite { font-size: 15px; font-weight: 500; color: #1A6BB5; margin-bottom: 14px; }
+    .flow-divider { border: none; border-top: 1px solid var(--border); margin: 28px 0; }
+
+    @media (max-width: 600px) {
+      .flow-action { margin-left: 0; }
+      .flow-num { width: 28px; height: 28px; min-width: 28px; font-size: 13px; }
+    }
+
+    .flow-num { width: 32px; height: 32px; min-width: 32px; border-radius: 50%; background: #0A1F5C; color: white; font-size: 15px; font-weight: 500; display: flex; align-items: center; justify-content: center; margin-top: 2px; flex-shrink: 0; }
     .admin-note { font-size: 14px; color: var(--ink-mid); }
     .spinner { display: inline-block; width: 14px; height: 14px; border: 2px solid rgba(255,255,255,.3); border-top-color: white; border-radius: 50%; animation: spin .7s linear infinite; vertical-align: -2px; margin-right: 6px; }
-    @keyframes spin { to { transform: rotate(360deg); } }
 
-    /* ── RESPONSIVE ── */
+    @keyframes spin { to { transform: rotate(360deg); } }
     @media (max-width: 600px) {
       .site-header { padding: 14px 16px; gap: 10px; }
       .site-header-logo strong { font-size: 14px; }
@@ -240,150 +263,136 @@
 <!-- ── FORMULARIO ── -->
 <div class="screen active" id="screenForm">
 <div class="container">
+
   <div class="hero">
     <div class="hero-eyebrow">Inscripción docentes</div>
     <h1>Seminario de Humanidades<br>y <em>Pensamiento Tomista</em></h1>
-    <p class="hero-sub">Julio 2026 · Tres niveles · Dos rutas de aprendizaje</p>
+    <p class="hero-sub">Julio 2026 &nbsp;·&nbsp; <em class="hero-lema">Dos rutas, un solo objetivo: ¡ser los mejores!</em></p>
   </div>
 
-  <div class="guide-box">
-    <button class="guide-toggle" onclick="toggleGuide()">
-      <span style="font-size:18px;color:var(--gold)">📖</span>
-      <span>
-        <div class="guide-toggle-text">Guía de inscripción — léala antes de comenzar</div>
-        <div class="guide-toggle-sub">Instrucciones detalladas paso a paso</div>
-      </span>
-      <span class="guide-chevron open" id="guideChevron">▾</span>
-    </button>
-    <div class="guide-body open" id="guideBody">
-      <div class="g-step">
-        <div class="g-num">1</div>
-        <div>
-          <div class="g-title">¿Qué es este seminario?</div>
-          <div class="g-text">El <strong>Seminario de Humanidades y Pensamiento Tomista 2026-1</strong> es un espacio académico para todos los docentes de la Universidad Santo Tomás, seccional Villavicencio. Su propósito es fortalecer las competencias docentes en lectura crítica y producción escrita desde una perspectiva humanista y tomista.</div>
+  <!-- ── BLOQUE 1: QUÉ ES ── -->
+  <div class="flow-block">
+    <div class="flow-explain">
+      <div class="flow-num">1</div>
+      <div class="flow-explain-body">
+        <div class="flow-title">¿Qué es este seminario?</div>
+        <div class="flow-text">El <strong>Seminario de Humanidades y Pensamiento Tomista 2026-1</strong> es un espacio académico para todos los docentes de la Universidad Santo Tomás, seccional Villavicencio. Su propósito es fortalecer las competencias docentes en lectura crítica y producción escrita desde una perspectiva humanista y tomista.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="flow-divider"></div>
+
+  <!-- ── BLOQUE 2: RUTA ── -->
+  <div class="flow-block">
+    <div class="flow-explain">
+      <div class="flow-num">2</div>
+      <div class="flow-explain-body">
+        <div class="flow-title">Escoge tu ruta de aprendizaje</div>
+        <div class="flow-text">El seminario tiene <strong>dos rutas de aprendizaje</strong>. Debes escoger <strong>una sola</strong> y cursarla completa en los tres niveles:
+          <ul>
+            <li><strong>Ruta 1 — Lectura crítica:</strong> análisis, interpretación y evaluación de textos continuos y discontinuos.</li>
+            <li><strong>Ruta 2 — Comunicación escrita:</strong> procesos de argumentación y producción textual.</li>
+          </ul>
+          <div class="warn-inline">⚠️ Una vez confirmada la inscripción, <strong>no podrás cambiar de ruta</strong>.</div>
         </div>
       </div>
-      <div class="g-divider"></div>
-      <div class="g-step">
-        <div class="g-num">2</div>
-        <div>
-          <div class="g-title">Las dos rutas: escoge solo una</div>
-          <div class="g-text">El seminario ofrece <strong>dos rutas de aprendizaje</strong>. Debes escoger <strong>una sola ruta</strong> y cursarla completa:
-            <ul>
-              <li><strong>Ruta 1 — Lectura crítica:</strong> análisis, interpretación y evaluación de continuos y discontinuos.</li>
-              <li><strong>Ruta 2 — Comunicación escrita:</strong> procesos de argumentación y producción textual.</li>
-            </ul>
-            <div class="warn-box">⚠️ <strong>Importante:</strong> una vez confirmes tu inscripción, <strong>no podrás cambiar de ruta</strong>. Reflexiona bien antes de elegir.</div>
-          </div>
+    </div>
+    <div class="flow-action">
+      <p class="flow-invite">👇 Selecciona tu ruta a continuación:</p>
+      <div class="rutas-grid">
+        <div class="ruta-card" data-ruta="1" onclick="selectRuta(1)">
+          <div class="ruta-icon">📚</div>
+          <div class="ruta-num">Ruta 1</div>
+          <div class="ruta-title">Lectura crítica</div>
+          <div class="ruta-desc">Análisis, interpretación y evaluación de textos continuos y discontinuos.</div>
         </div>
-      </div>
-      <div class="g-divider"></div>
-      <div class="g-step">
-        <div class="g-num">3</div>
-        <div>
-          <div class="g-title">Los tres niveles: fechas y horarios</div>
-          <div class="g-text">Cada ruta se desarrolla en <strong>tres niveles progresivos</strong> en días consecutivos. La asistencia a los tres es <strong>obligatoria</strong>:
-            <table class="g-table">
-              <thead><tr><th>Nivel</th><th>Fecha</th><th>Horario</th></tr></thead>
-              <tbody>
-                <tr><td><strong>Nivel 1</strong></td><td>Martes 7 de julio de 2026</td><td>10:30 a.m. – 12:00 m.</td></tr>
-                <tr><td><strong>Nivel 2</strong></td><td>Miércoles 8 de julio de 2026</td><td>8:30 a.m. – 10:00 a.m.</td></tr>
-                <tr><td><strong>Nivel 3</strong></td><td>Miércoles 8 de julio de 2026</td><td>10:30 a.m. – 12:00 m.</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-      <div class="g-divider"></div>
-      <div class="g-step">
-        <div class="g-num">4</div>
-        <div>
-          <div class="g-title">Los grupos: un grupo por cada nivel (tres en total)</div>
-          <div class="g-text">Para cada nivel hay <strong>cinco grupos (A, B, C, D, E)</strong>, todos con el mismo contenido. Debes escoger <strong>un grupo por nivel</strong>, es decir tres grupos en total.
-            <ul>
-              <li>Puedes elegir grupos distintos en cada nivel.</li>
-              <li>Cada grupo tiene máximo <strong>20 docentes</strong>.</li>
-              <li>Indicadores de cupos: <span class="badge-ok">disponible</span> &nbsp; <span class="badge-low">casi lleno</span> &nbsp; <span class="badge-full">lleno</span></li>
-            </ul>
-            <div class="warn-box">⚠️ <strong>Importante:</strong> una vez confirmada la inscripción, <strong>no podrás cambiar de grupo</strong>.</div>
-          </div>
-        </div>
-      </div>
-      <div class="g-divider"></div>
-      <div class="g-step">
-        <div class="g-num">5</div>
-        <div>
-          <div class="g-title">Tus datos y confirmación</div>
-          <div class="g-text">Diligencia nombres, apellidos, cédula, correo institucional y programa. Al confirmar recibirás un <strong>comprobante descargable con código único</strong>. Cada docente solo puede inscribirse <strong>una vez</strong>; el sistema verifica tu cédula.</div>
+        <div class="ruta-card" data-ruta="2" onclick="selectRuta(2)">
+          <div class="ruta-icon">✍️</div>
+          <div class="ruta-num">Ruta 2</div>
+          <div class="ruta-title">Comunicación escrita</div>
+          <div class="ruta-desc">Procesos de argumentación y producción textual.</div>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="sec-label"><span class="sec-num">1</span>Selecciona tu ruta de aprendizaje</div>
-  <div class="rutas-grid">
-    <div class="ruta-card" data-ruta="1" onclick="selectRuta(1)">
-      <div class="ruta-icon">📚</div>
-      <div class="ruta-num">Ruta 1</div>
-      <div class="ruta-title">Lectura crítica</div>
-      <div class="ruta-desc">Análisis, interpretación y evaluación de continuos y discontinuos.</div>
+  <div class="flow-divider"></div>
+
+  <!-- ── BLOQUE 3: NIVELES Y GRUPOS ── -->
+  <div class="flow-block">
+    <div class="flow-explain">
+      <div class="flow-num">3</div>
+      <div class="flow-explain-body">
+        <div class="flow-title">Escoge un grupo por cada nivel</div>
+        <div class="flow-text">Cada ruta tiene <strong>tres niveles progresivos</strong>. La asistencia a los tres es <strong>obligatoria</strong>. Para cada nivel hay cinco grupos (A–E) con el mismo contenido; escoge <strong>uno por nivel</strong>, tres en total.
+          <div style="margin-top:10px;font-size:14px;color:var(--ink-mid)">Indicadores de cupos: <span class="badge-ok">disponible</span> &nbsp;<span class="badge-low">casi lleno</span> &nbsp;<span class="badge-full">lleno</span></div>
+          <div class="warn-inline">⚠️ Una vez confirmada la inscripción, <strong>no podrás cambiar de grupo</strong>.</div>
+        </div>
+      </div>
     </div>
-    <div class="ruta-card" data-ruta="2" onclick="selectRuta(2)">
-      <div class="ruta-icon">✍️</div>
-      <div class="ruta-num">Ruta 2</div>
-      <div class="ruta-title">Comunicación escrita</div>
-      <div class="ruta-desc">Procesos de argumentación y producción textual.</div>
+    <div class="flow-action" id="nivelesSection">
+      <p class="flow-invite">👇 Escoge tu grupo en cada nivel:</p>
+      <div id="nivelesRows"></div>
     </div>
   </div>
 
-  <div id="nivelesSection" style="display:none">
-    <div class="sec-label"><span class="sec-num">2</span>Escoge un grupo por cada nivel (tres en total)</div>
-    <p style="font-size:13px;color:var(--ink-mid);margin-bottom:14px;line-height:1.6">Selecciona <strong>un grupo</strong> para cada uno de los tres niveles. Puedes elegir grupos distintos según tu disponibilidad horaria.</p>
-    <div id="nivelesRows"></div>
-  </div>
+  <div class="flow-divider"></div>
 
-  <div class="sec-divider"></div>
-
-  <div class="sec-label"><span class="sec-num">3</span>Diligencia tus datos personales</div>
-  <div style="margin-bottom:24px">
-    <div class="fields-grid">
-      <div class="field"><label for="nombre">Nombres</label><input type="text" id="nombre" placeholder="Ej. María Fernanda"><span class="err-msg" id="err-nombre">Campo requerido</span></div>
-      <div class="field"><label for="apellido">Apellidos</label><input type="text" id="apellido" placeholder="Ej. García Ruiz"><span class="err-msg" id="err-apellido">Campo requerido</span></div>
-      <div class="field"><label for="cedula">Número de cédula</label><input type="text" id="cedula" placeholder="Solo números, sin puntos"><span class="err-msg" id="err-cedula">Campo requerido</span></div>
-      <div class="field"><label for="email">Correo institucional</label><input type="email" id="email" placeholder="usuario@usantotomas.edu.co"><span class="err-msg" id="err-email">Ingresa un correo válido</span></div>
-      <div class="field full">
-        <label for="programa">Programa académico</label>
-        <select id="programa">
-          <option value="">— Selecciona tu programa —</option>
-          <option>Administración de Empresas Agropecuarias</option>
-          <option>Arquitectura</option>
-          <option>Arte y Cultura</option>
-          <option>Cultura Física, Deporte y Recreación</option>
-          <option>Contaduría Pública</option>
-          <option>Derecho</option>
-          <option>Ingeniería Ambiental</option>
-          <option>Ingeniería Civil</option>
-          <option>Ingeniería Industrial</option>
-          <option>Ingeniería Mecánica</option>
-          <option>Ingeniería de Sistemas</option>
-          <option>Ingeniería Mecatrónica</option>
-          <option>Lenguas Extranjeras</option>
-          <option>Negocios Internacionales</option>
-          <option>Psicología</option>
-        </select>
-        <span class="err-msg" id="err-programa">Selecciona un programa</span>
+  <!-- ── BLOQUE 4: DATOS ── -->
+  <div class="flow-block">
+    <div class="flow-explain">
+      <div class="flow-num">4</div>
+      <div class="flow-explain-body">
+        <div class="flow-title">Diligencia tus datos personales</div>
+        <div class="flow-text">Al terminar de ingresar tus datos recibirás un comprobante de inscripción descargable. Recuerda que solo puedes inscribirte una vez.</div>
+      </div>
+    </div>
+    <div class="flow-action">
+      <p class="flow-invite">👇 Completa tus datos:</p>
+      <div class="fields-grid">
+        <div class="field"><label for="nombre">Nombres</label><input type="text" id="nombre" placeholder="Ej. María Fernanda"><span class="err-msg" id="err-nombre">Campo requerido</span></div>
+        <div class="field"><label for="apellido">Apellidos</label><input type="text" id="apellido" placeholder="Ej. García Ruiz"><span class="err-msg" id="err-apellido">Campo requerido</span></div>
+        <div class="field"><label for="cedula">Número de cédula</label><input type="text" id="cedula" placeholder="Solo números, sin puntos"><span class="err-msg" id="err-cedula">Campo requerido</span></div>
+        <div class="field"><label for="email">Correo institucional</label><input type="email" id="email" placeholder="usuario@ustavillavicencio.edu.co"><span class="err-msg" id="err-email">Ingresa un correo válido</span></div>
+        <div class="field full">
+          <label for="programa">Programa académico</label>
+          <select id="programa">
+            <option value="">— Selecciona tu programa —</option>
+            <option>Administración de Empresas Agropecuarias</option>
+            <option>Arquitectura</option>
+            <option>Arte y Cultura</option>
+            <option>Cultura Física, Deporte y Recreación</option>
+            <option>Contaduría Pública</option>
+            <option>Derecho</option>
+            <option>Ingeniería Ambiental</option>
+            <option>Ingeniería Civil</option>
+            <option>Ingeniería Industrial</option>
+            <option>Ingeniería Mecánica</option>
+            <option>Ingeniería de Sistemas</option>
+            <option>Ingeniería Mecatrónica</option>
+            <option>Lenguas Extranjeras</option>
+            <option>Negocios Internacionales</option>
+            <option>Psicología</option>
+          </select>
+          <span class="err-msg" id="err-programa">Selecciona un programa</span>
+        </div>
       </div>
     </div>
   </div>
 
+  <div class="flow-divider"></div>
+
+  <!-- ── RESUMEN Y CONFIRMACIÓN ── -->
   <div class="summary-card" id="summaryCard">
-    <div class="sec-label" style="margin-bottom:10px;font-size:10px">Verifica tu inscripción antes de confirmar</div>
+    <div class="sec-label" style="margin-bottom:12px">Verifica tu inscripción antes de confirmar</div>
     <div id="summaryContent"></div>
-    <div class="warn-box" style="margin-top:12px">⚠️ Al confirmar, tu inscripción quedará registrada de forma <strong>definitiva e irrevocable</strong>. No se permiten cambios de ruta ni de grupo.</div>
+    <div class="warn-box" style="margin-top:14px">⚠️ Al confirmar, tu inscripción quedará registrada. Te pedimos verificar bien tu selección, pues no será posible hacer cambios de ruta ni de grupo.</div>
   </div>
 
   <div class="alert-bar" id="alertBar"></div>
   <button class="submit-btn" id="submitBtn" onclick="handleSubmit()">Confirmar inscripción</button>
+
 </div>
 </div>
 
@@ -470,9 +479,9 @@ const ADMIN_PASS = 'SHPT_2026-1';
 
 const MAX = 20, GROUPS = ['A','B','C','D','E'];
 const NIVELES = [
-  { num:1, dia:'Martes 7 de julio de 2026',      hora:'10:30 a.m. – 12:00 m.' },
-  { num:2, dia:'Miércoles 8 de julio de 2026',   hora:'8:30 a.m. – 10:00 a.m.' },
-  { num:3, dia:'Miércoles 8 de julio de 2026',   hora:'10:30 a.m. – 12:00 m.' },
+  { num:1, dia:'Martes 7 de julio de 2026',      hora:'10:30 a.m. – 12:00 m.',  salones:{ A:'Por definir', B:'Por definir', C:'Por definir', D:'Por definir', E:'Por definir' } },
+  { num:2, dia:'Miércoles 8 de julio de 2026',   hora:'8:30 a.m. – 10:00 a.m.', salones:{ A:'Por definir', B:'Por definir', C:'Por definir', D:'Por definir', E:'Por definir' } },
+  { num:3, dia:'Miércoles 8 de julio de 2026',   hora:'10:30 a.m. – 12:00 m.',  salones:{ A:'Por definir', B:'Por definir', C:'Por definir', D:'Por definir', E:'Por definir' } },
 ];
 
 let cupos = {}, registros = {}, regList = [], lastConf = null;
@@ -518,15 +527,18 @@ function renderNiveles() {
     <div class="nivel-block">
       <div class="nivel-header">
         <span class="nivel-pill">Nivel ${n.num}</span>
-        <span class="nivel-fecha">${n.dia}</span>
-        <span class="nivel-hora">⏰ ${n.hora}</span>
+        <div class="nivel-info">
+          <span class="nivel-fecha">${n.dia}</span>
+          <span class="nivel-hora-badge">⏰ ${n.hora}</span>
+        </div>
       </div>
       <div class="grupos-row">
         ${GROUPS.map(g=>{
           const k=`${n.num}-${g}`,full=left(k)<=0,sel=selGrp[n.num]===g;
           return `<button class="grupo-btn${sel?' selected':''}${full?' ':''}" onclick="${full?'':`pickGroup(${n.num},'${g}')`}" ${full?'disabled':''}>
-            <span class="g-label">Gr. ${g}</span>
+            <span class="g-label">Grupo ${g}</span>
             <span class="g-cupos ${bc(k)}">${cl(k)}</span>
+            <span class="g-salon">📍 ${n.salones[g]}</span>
             ${sel?'<span class="g-check">✓</span>':''}
           </button>`;
         }).join('')}
@@ -541,7 +553,7 @@ function updateSummary(){
   const rn=selRuta===1?'Lectura crítica':'Comunicación escrita';
   document.getElementById('summaryContent').innerHTML=`
     <div class="sum-row"><span>Ruta</span><span>Ruta ${selRuta} · ${rn}</span></div>
-    ${NIVELES.map(n=>`<div class="sum-row"><span>Nivel ${n.num} · ${n.dia}</span><span>Grupo ${selGrp[n.num]} · ${n.hora}</span></div>`).join('')}`;
+    ${NIVELES.map(n=>`<div class="sum-row"><span>Nivel ${n.num} · ${n.dia}</span><span>Grupo ${selGrp[n.num]} · ${n.hora} · 📍 ${n.salones[selGrp[n.num]]}</span></div>`).join('')}`;
   card.classList.add('visible');
 }
 function showAlert(msg){
@@ -577,7 +589,12 @@ async function handleSubmit(){
   const rn=selRuta===1?'Lectura crítica':'Comunicación escrita';
   const code='USTA-'+Math.random().toString(36).substring(2,7).toUpperCase();
   const fecha=new Date().toLocaleString('es-CO');
-  const payload={cedula:ced,nombre:nom,apellido:ape,email:eml,programa:prg,ruta:selRuta,rutaNombre:rn,grupo1:selGrp[1],grupo2:selGrp[2],grupo3:selGrp[3],code,fecha};
+  const payload={cedula:ced,nombre:nom,apellido:ape,email:eml,programa:prg,ruta:selRuta,rutaNombre:rn,
+    grupo1:selGrp[1],grupo2:selGrp[2],grupo3:selGrp[3],
+    salon1:NIVELES[0].salones[selGrp[1]],
+    salon2:NIVELES[1].salones[selGrp[2]],
+    salon3:NIVELES[2].salones[selGrp[3]],
+    code,fecha};
 
   const btn=document.getElementById('submitBtn');
   btn.disabled=true; btn.classList.add('loading');
@@ -604,7 +621,7 @@ async function handleSubmit(){
     <div class="conf-row"><span>Correo</span><span>${eml}</span></div>
     <div class="conf-row"><span>Programa</span><span>${prg}</span></div>
     <div class="conf-row"><span>Ruta</span><span>Ruta ${selRuta} · ${rn}</span></div>
-    ${NIVELES.map(n=>`<div class="conf-row"><span>Nivel ${n.num} · ${n.dia}</span><span><strong>Grupo ${selGrp[n.num]}</strong> · ${n.hora}</span></div>`).join('')}`;
+    ${NIVELES.map(n=>`<div class="conf-row"><span>Nivel ${n.num} · ${n.dia}</span><span><strong>Grupo ${selGrp[n.num]}</strong> · ${n.hora} · 📍 ${n.salones[selGrp[n.num]]}</span></div>`).join('')}`;
   document.getElementById('confCode').textContent=code;
   document.getElementById('confFecha').textContent='Registrado el '+fecha;
   btn.disabled=false; btn.classList.remove('loading'); btn.innerHTML='Confirmar inscripción';
@@ -633,9 +650,9 @@ function downloadComprobante(){
     <tr><td>Correo institucional</td><td>${r.email}</td></tr>
     <tr><td>Programa académico</td><td>${r.programa}</td></tr>
     <tr><td>Ruta seleccionada</td><td>Ruta ${r.ruta} · ${r.rutaNombre}</td></tr>
-    <tr><td>Nivel 1 · Mar. 7 jul.</td><td>Grupo ${r.grupo1} · 10:30 a.m. – 12:00 m.</td></tr>
-    <tr><td>Nivel 2 · Mié. 8 jul.</td><td>Grupo ${r.grupo2} · 8:30 a.m. – 10:00 a.m.</td></tr>
-    <tr><td>Nivel 3 · Mié. 8 jul.</td><td>Grupo ${r.grupo3} · 10:30 a.m. – 12:00 m.</td></tr>
+    <tr><td>Nivel 1 · Mar. 7 jul.</td><td>Grupo ${r.grupo1} · 10:30 a.m. – 12:00 m. · 📍 ${r.salon1}</td></tr>
+    <tr><td>Nivel 2 · Mié. 8 jul.</td><td>Grupo ${r.grupo2} · 8:30 a.m. – 10:00 a.m. · 📍 ${r.salon2}</td></tr>
+    <tr><td>Nivel 3 · Mié. 8 jul.</td><td>Grupo ${r.grupo3} · 10:30 a.m. – 12:00 m. · 📍 ${r.salon3}</td></tr>
   </table>
   <div class="code-box"><div class="code-lbl">Código de confirmación</div><div class="code">${r.code}</div></div>
   <div class="footer">Registrado el ${r.fecha}<br>Comprobante oficial — Seminario de Humanidades y Pensamiento Tomista 2026-1 · USTA Villavicencio. Consérvelo para el día del evento.</div>
