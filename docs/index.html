@@ -485,7 +485,7 @@ const NIVELES = [
 ];
 
 let cupos = {}, registros = {}, regList = [], lastConf = null;
-NIVELES.forEach(n => GROUPS.forEach(g => { cupos[`${n.num}-${g}`] = 0; }));
+[1,2].forEach(r => NIVELES.forEach(n => GROUPS.forEach(g => { cupos[`${r}-${n.num}-${g}`] = 0; })));
 let selRuta = null, selGrp = {1:null,2:null,3:null};
 
 async function cargarCupos() {
@@ -493,10 +493,10 @@ async function cargarCupos() {
     const res = await fetch(`${SHEET_URL}?action=cupos`);
     const data = await res.json();
     if (data.ok && data.cupos) {
-      NIVELES.forEach(n => GROUPS.forEach(g => {
-        const key = `${n.num}-${g}`;
+      [1,2].forEach(r => NIVELES.forEach(n => GROUPS.forEach(g => {
+        const key = `${r}-${n.num}-${g}`;
         cupos[key] = MAX - (data.cupos[key] !== undefined ? data.cupos[key] : MAX);
-      }));
+      })));
       if (selRuta) renderNiveles();
     }
   } catch(e) { console.warn('No se pudieron cargar cupos:', e); }
@@ -512,9 +512,9 @@ function toggleGuide() {
   document.getElementById('guideBody').classList.toggle('open');
   document.getElementById('guideChevron').classList.toggle('open');
 }
-const left = k => MAX - cupos[k];
-const bc   = k => { const l=left(k); return l<=0?'badge-full':l<=5?'badge-low':'badge-ok'; };
-const cl   = k => { const l=left(k); return l<=0?'Lleno':`${l} cupo${l===1?'':'s'}`; };
+const left = (r,n,g) => MAX - (cupos[`${r}-${n}-${g}`] || 0);
+const bc   = (r,n,g) => { const l=left(r,n,g); return l<=0?'badge-full':l<=5?'badge-low':'badge-ok'; };
+const cl   = (r,n,g) => { const l=left(r,n,g); return l<=0?'Lleno':`${l} cupo${l===1?'':'s'}`; };
 
 function selectRuta(r) {
   selRuta=r; selGrp={1:null,2:null,3:null};
@@ -534,10 +534,10 @@ function renderNiveles() {
       </div>
       <div class="grupos-row">
         ${GROUPS.map(g=>{
-          const k=`${n.num}-${g}`,full=left(k)<=0,sel=selGrp[n.num]===g;
+          const full=left(selRuta,n.num,g)<=0, sel=selGrp[n.num]===g;
           return `<button class="grupo-btn${sel?' selected':''}${full?' ':''}" onclick="${full?'':`pickGroup(${n.num},'${g}')`}" ${full?'disabled':''}>
             <span class="g-label">Grupo ${g}</span>
-            <span class="g-cupos ${bc(k)}">${cl(k)}</span>
+            <span class="g-cupos ${bc(selRuta,n.num,g)}">${cl(selRuta,n.num,g)}</span>
             <span class="g-salon">📍 ${n.salones[g]}</span>
             ${sel?'<span class="g-check">✓</span>':''}
           </button>`;
@@ -578,7 +578,7 @@ function validateForm(){
 async function handleSubmit(){
   if(!selRuta){showAlert('Por favor selecciona una ruta de aprendizaje.');return;}
   if(!selGrp[1]||!selGrp[2]||!selGrp[3]){showAlert('Debes escoger un grupo para cada nivel.');return;}
-  for(const n of NIVELES){const k=`${n.num}-${selGrp[n.num]}`;if(left(k)<=0){showAlert(`El grupo ${selGrp[n.num]} del Nivel ${n.num} se llenó. Elige otro.`);renderNiveles();return;}}
+  for(const n of NIVELES){if(left(selRuta,n.num,selGrp[n.num])<=0){showAlert(`El grupo ${selGrp[n.num]} del Nivel ${n.num} se llenó. Elige otro.`);renderNiveles();return;}}
   if(!validateForm())return;
   const ced=document.getElementById('cedula').value.trim();
   if(registros[ced]){showAlert('Ya existe una inscripción con este número de cédula.');return;}
@@ -608,10 +608,10 @@ async function handleSubmit(){
       body: JSON.stringify(payload)
     });
     // Con no-cors no podemos leer la respuesta, actualizamos cupos localmente
-    NIVELES.forEach(n=>{cupos[`${n.num}-${selGrp[n.num]}`]++;});
+    NIVELES.forEach(n=>{ cupos[`${selRuta}-${n.num}-${selGrp[n.num]}`] = (cupos[`${selRuta}-${n.num}-${selGrp[n.num]}`]||0) + 1; });
   } catch(e) {
     console.warn('Error enviando a Sheets:',e);
-    NIVELES.forEach(n=>{cupos[`${n.num}-${selGrp[n.num]}`]++;});
+    NIVELES.forEach(n=>{ cupos[`${selRuta}-${n.num}-${selGrp[n.num]}`] = (cupos[`${selRuta}-${n.num}-${selGrp[n.num]}`]||0) + 1; });
   }
   registros[ced]=payload; regList.push(payload); lastConf=payload;
 
