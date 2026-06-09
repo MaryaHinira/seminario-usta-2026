@@ -325,7 +325,7 @@
       <div class="flow-num">3</div>
       <div class="flow-explain-body">
         <div class="flow-title">Escoge un grupo por cada nivel</div>
-        <div class="flow-text">Cada ruta tiene <strong>tres niveles progresivos</strong>. La asistencia a los tres es <strong>obligatoria</strong>. Para cada nivel hay cinco grupos (A–E) con el mismo contenido; escoge <strong>uno por nivel</strong>, tres en total.
+        <div class="flow-text">Cada ruta tiene <strong>tres niveles progresivos</strong>. La asistencia a los tres es <strong>obligatoria</strong>. Para cada nivel hay cuatro grupos (A–D) con el mismo contenido; escoge <strong>uno por nivel</strong>, tres en total.
           <div style="margin-top:10px;font-size:14px;color:var(--ink-mid)">Indicadores de cupos: <span class="badge-ok">disponible</span> &nbsp;<span class="badge-low">casi lleno</span> &nbsp;<span class="badge-full">lleno</span></div>
           <div class="warn-inline">⚠️ Una vez confirmada la inscripción, <strong>no podrás cambiar de grupo</strong>.</div>
         </div>
@@ -477,11 +477,11 @@ const SHEET_URL = 'https://script.google.com/macros/s/AKfycby5AWAHOB_CPy0VpFGN5m
 const ADMIN_PASS = 'SHPT_2026-1';
 // ══════════════════════════════════════════════════════
 
-const MAX = 20, GROUPS = ['A','B','C','D','E'];
+const MAX = 20, GROUPS = ['A','B','C','D'];
 const NIVELES = [
-  { num:1, dia:'Martes 7 de julio de 2026',      hora:'10:30 a.m. – 12:00 m.',  salones:{ A:'Por definir', B:'Por definir', C:'Por definir', D:'Por definir', E:'Por definir' } },
-  { num:2, dia:'Miércoles 8 de julio de 2026',   hora:'8:30 a.m. – 10:00 a.m.', salones:{ A:'Por definir', B:'Por definir', C:'Por definir', D:'Por definir', E:'Por definir' } },
-  { num:3, dia:'Miércoles 8 de julio de 2026',   hora:'10:30 a.m. – 12:00 m.',  salones:{ A:'Por definir', B:'Por definir', C:'Por definir', D:'Por definir', E:'Por definir' } },
+  { num:1, dia:'Martes 7 de julio de 2026',      hora:'10:30 a.m. – 12:00 m.',  salones:{ A:'Por definir', B:'Por definir', C:'Por definir', D:'Por definir' } },
+  { num:2, dia:'Miércoles 8 de julio de 2026',   hora:'8:30 a.m. – 10:00 a.m.', salones:{ A:'Por definir', B:'Por definir', C:'Por definir', D:'Por definir' } },
+  { num:3, dia:'Miércoles 8 de julio de 2026',   hora:'10:30 a.m. – 12:00 m.',  salones:{ A:'Por definir', B:'Por definir', C:'Por definir', D:'Por definir' } },
 ];
 
 let cupos = {}, registros = {}, regList = [], lastConf = null;
