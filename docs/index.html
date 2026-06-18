@@ -479,9 +479,24 @@ const ADMIN_PASS = 'SHPT_2026-1';
 
 const MAX = 20, GROUPS = ['A','B','C','D'];
 const NIVELES = [
-  { num:1, dia:'Martes 7 de julio de 2026',      hora:'10:30 a.m. – 12:00 m.',  salones:{ A:'Por definir', B:'Por definir', C:'Por definir', D:'Por definir' } },
-  { num:2, dia:'Miércoles 8 de julio de 2026',   hora:'8:30 a.m. – 10:00 a.m.', salones:{ A:'Por definir', B:'Por definir', C:'Por definir', D:'Por definir' } },
-  { num:3, dia:'Miércoles 8 de julio de 2026',   hora:'10:30 a.m. – 12:00 m.',  salones:{ A:'Por definir', B:'Por definir', C:'Por definir', D:'Por definir' } },
+  { num:1, dia:'Martes 7 de julio de 2026', hora:'10:00 a.m. – 12:00 m.',
+    salones:{
+      1: { A:'Salón 101B', B:'Salón 102B', C:'Salón 201B', D:'Salón 202B' },
+      2: { A:'Salón 203B', B:'Salón 204B', C:'Salón 205B', D:'Salón 301B' }
+    }
+  },
+  { num:2, dia:'Miércoles 8 de julio de 2026', hora:'8:00 a.m. – 10:00 a.m.',
+    salones:{
+      1: { A:'Salón 101B', B:'Salón 102B', C:'Salón 201B', D:'Salón 202B' },
+      2: { A:'Salón 203B', B:'Salón 204B', C:'Salón 205B', D:'Salón 301B' }
+    }
+  },
+  { num:3, dia:'Miércoles 8 de julio de 2026', hora:'10:00 a.m. – 12:00 m.',
+    salones:{
+      1: { A:'Salón 101B', B:'Salón 102B', C:'Salón 201B', D:'Salón 202B' },
+      2: { A:'Salón 203B', B:'Salón 204B', C:'Salón 205B', D:'Salón 301B' }
+    }
+  },
 ];
 
 let cupos = {}, registros = {}, regList = [], lastConf = null;
@@ -538,7 +553,7 @@ function renderNiveles() {
           return `<button class="grupo-btn${sel?' selected':''}${full?' ':''}" onclick="${full?'':`pickGroup(${n.num},'${g}')`}" ${full?'disabled':''}>
             <span class="g-label">Grupo ${g}</span>
             <span class="g-cupos ${bc(selRuta,n.num,g)}">${cl(selRuta,n.num,g)}</span>
-            <span class="g-salon">📍 ${n.salones[g]}</span>
+            <span class="g-salon">📍 ${n.salones[selRuta][g]}</span>
             ${sel?'<span class="g-check">✓</span>':''}
           </button>`;
         }).join('')}
@@ -591,9 +606,9 @@ async function handleSubmit(){
   const fecha=new Date().toLocaleString('es-CO');
   const payload={cedula:ced,nombre:nom,apellido:ape,email:eml,programa:prg,ruta:selRuta,rutaNombre:rn,
     grupo1:selGrp[1],grupo2:selGrp[2],grupo3:selGrp[3],
-    salon1:NIVELES[0].salones[selGrp[1]],
-    salon2:NIVELES[1].salones[selGrp[2]],
-    salon3:NIVELES[2].salones[selGrp[3]],
+    salon1:NIVELES[0].salones[selRuta][selGrp[1]],
+    salon2:NIVELES[1].salones[selRuta][selGrp[2]],
+    salon3:NIVELES[2].salones[selRuta][selGrp[3]],
     code,fecha};
 
   const btn=document.getElementById('submitBtn');
@@ -650,9 +665,9 @@ function downloadComprobante(){
     <tr><td>Correo institucional</td><td>${r.email}</td></tr>
     <tr><td>Programa académico</td><td>${r.programa}</td></tr>
     <tr><td>Ruta seleccionada</td><td>Ruta ${r.ruta} · ${r.rutaNombre}</td></tr>
-    <tr><td>Nivel 1 · Mar. 7 jul.</td><td>Grupo ${r.grupo1} · 10:30 a.m. – 12:00 m. · 📍 ${r.salon1}</td></tr>
-    <tr><td>Nivel 2 · Mié. 8 jul.</td><td>Grupo ${r.grupo2} · 8:30 a.m. – 10:00 a.m. · 📍 ${r.salon2}</td></tr>
-    <tr><td>Nivel 3 · Mié. 8 jul.</td><td>Grupo ${r.grupo3} · 10:30 a.m. – 12:00 m. · 📍 ${r.salon3}</td></tr>
+    <tr><td>Nivel 1 · Mar. 7 jul.</td><td>Grupo ${r.grupo1} · 10:00 a.m. – 12:00 m. · 📍 ${r.salon1}</td></tr>
+    <tr><td>Nivel 2 · Mié. 8 jul.</td><td>Grupo ${r.grupo2} · 8:00 a.m. – 10:00 a.m. · 📍 ${r.salon2}</td></tr>
+    <tr><td>Nivel 3 · Mié. 8 jul.</td><td>Grupo ${r.grupo3} · 10:00 a.m. – 12:00 m. · 📍 ${r.salon3}</td></tr>
   </table>
   <div class="code-box"><div class="code-lbl">Código de confirmación</div><div class="code">${r.code}</div></div>
   <div class="footer">Registrado el ${r.fecha}<br>Comprobante oficial — Seminario de Humanidades y Pensamiento Tomista 2026-1 · USTA Villavicencio. Consérvelo para el día del evento.</div>
