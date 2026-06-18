@@ -353,7 +353,7 @@
       <div class="fields-grid">
         <div class="field"><label for="nombre">Nombres</label><input type="text" id="nombre" placeholder="Ej. María Fernanda"><span class="err-msg" id="err-nombre">Campo requerido</span></div>
         <div class="field"><label for="apellido">Apellidos</label><input type="text" id="apellido" placeholder="Ej. García Ruiz"><span class="err-msg" id="err-apellido">Campo requerido</span></div>
-        <div class="field"><label for="cedula">Número de cédula</label><input type="text" id="cedula" placeholder="Solo números, sin puntos"><span class="err-msg" id="err-cedula">Campo requerido</span></div>
+        <div class="field"><label for="cedula">Número de cédula</label><input type="text" id="cedula" placeholder="Solo números, sin puntos" onblur="verificarCedula(this.value)"><span class="err-msg" id="err-cedula">Campo requerido</span><span class="cedula-checking" id="cedulaChecking" style="display:none;font-size:13px;color:var(--ink-light)">⏳ Verificando...</span></div>
         <div class="field"><label for="email">Correo institucional</label><input type="email" id="email" placeholder="usuario@ustavillavicencio.edu.co"><span class="err-msg" id="err-email">Ingresa un correo válido</span></div>
         <div class="field full">
           <label for="programa">Programa académico</label>
@@ -418,6 +418,25 @@
     <div class="btn-row">
       <button class="btn-dl" onclick="downloadComprobante()">⬇ Descargar comprobante</button>
     </div>
+  </div>
+</div>
+</div>
+
+<!-- ── YA INSCRITO ── -->
+<div class="screen" id="screenYaInscrito">
+<div class="container">
+  <div class="success-wrap">
+    <div style="font-size:52px;margin-bottom:16px">ℹ️</div>
+    <div class="success-h">Ya estás inscrito</div>
+    <p class="success-sub">Encontramos una inscripción activa con tu número de cédula. No es posible inscribirse dos veces.</p>
+    <div class="conf-card">
+      <div class="conf-header-block">
+        <div class="conf-logo-title">Universidad Santo Tomás · Villavicencio</div>
+        <div class="conf-logo-sub">Seminario de Humanidades y Pensamiento Tomista 2026-1 · Inscripción existente</div>
+      </div>
+      <div id="yaInscritoBody"></div>
+    </div>
+    <p style="font-size:14px;color:var(--ink-mid);margin-top:16px;line-height:1.6">Si crees que hay un error, comunícate con la coordinación del seminario.</p>
   </div>
 </div>
 </div>
@@ -589,6 +608,33 @@ function validateForm(){
     if(!valid)ok=false;
   });
   return ok;
+}
+async function verificarCedula(ced) {
+  if (!ced || ced.trim().length < 4) return;
+  const checking = document.getElementById('cedulaChecking');
+  checking.style.display = 'block';
+  try {
+    const res = await fetch(`${SHEET_URL}?action=buscar&cedula=${encodeURIComponent(ced.trim())}`);
+    const data = await res.json();
+    checking.style.display = 'none';
+    if (data.ok && data.encontrado) {
+      const r = data.registro;
+      document.getElementById('yaInscritoBody').innerHTML = `
+        <div class="conf-row"><span>Docente</span><span>${r.nombre} ${r.apellido}</span></div>
+        <div class="conf-row"><span>Cédula</span><span>${r.cedula}</span></div>
+        <div class="conf-row"><span>Programa</span><span>${r.programa}</span></div>
+        <div class="conf-row"><span>Ruta</span><span>${r.ruta} · ${r.rutaNombre}</span></div>
+        <div class="conf-row"><span>Nivel 1</span><span>${r.grupo1} · ${r.salon1 || ''}</span></div>
+        <div class="conf-row"><span>Nivel 2</span><span>${r.grupo2} · ${r.salon2 || ''}</span></div>
+        <div class="conf-row"><span>Nivel 3</span><span>${r.grupo3} · ${r.salon3 || ''}</span></div>
+        <div class="conf-row"><span>Código</span><span>${r.code}</span></div>
+        <div class="conf-row"><span>Fecha</span><span>${r.fecha}</span></div>`;
+      goScreen('screenYaInscrito');
+    }
+  } catch(e) {
+    checking.style.display = 'none';
+    console.warn('Error verificando cédula:', e);
+  }
 }
 async function handleSubmit(){
   if(!selRuta){showAlert('Por favor selecciona una ruta de aprendizaje.');return;}
