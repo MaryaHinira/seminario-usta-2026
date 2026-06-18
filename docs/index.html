@@ -568,7 +568,7 @@ function updateSummary(){
   const rn=selRuta===1?'Lectura crítica':'Comunicación escrita';
   document.getElementById('summaryContent').innerHTML=`
     <div class="sum-row"><span>Ruta</span><span>Ruta ${selRuta} · ${rn}</span></div>
-    ${NIVELES.map(n=>`<div class="sum-row"><span>Nivel ${n.num} · ${n.dia}</span><span>Grupo ${selGrp[n.num]} · ${n.hora} · 📍 ${n.salones[selGrp[n.num]]}</span></div>`).join('')}`;
+    ${NIVELES.map(n=>`<div class="sum-row"><span>Nivel ${n.num} · ${n.dia}</span><span>Grupo ${selGrp[n.num]} · ${n.hora} · 📍 ${n.salones[selRuta][selGrp[n.num]]}</span></div>`).join('')}`;
   card.classList.add('visible');
 }
 function showAlert(msg){
@@ -636,7 +636,7 @@ async function handleSubmit(){
     <div class="conf-row"><span>Correo</span><span>${eml}</span></div>
     <div class="conf-row"><span>Programa</span><span>${prg}</span></div>
     <div class="conf-row"><span>Ruta</span><span>Ruta ${selRuta} · ${rn}</span></div>
-    ${NIVELES.map(n=>`<div class="conf-row"><span>Nivel ${n.num} · ${n.dia}</span><span><strong>Grupo ${selGrp[n.num]}</strong> · ${n.hora} · 📍 ${n.salones[selGrp[n.num]]}</span></div>`).join('')}`;
+    ${NIVELES.map(n=>`<div class="conf-row"><span>Nivel ${n.num} · ${n.dia}</span><span><strong>Grupo ${selGrp[n.num]}</strong> · ${n.hora} · 📍 ${n.salones[selRuta][selGrp[n.num]]}</span></div>`).join('')}`;
   document.getElementById('confCode').textContent=code;
   document.getElementById('confFecha').textContent='Registrado el '+fecha;
   btn.disabled=false; btn.classList.remove('loading'); btn.innerHTML='Confirmar inscripción';
