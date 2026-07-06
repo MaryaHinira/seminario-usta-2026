@@ -621,16 +621,22 @@ async function verificarCedula(ced) {
     checking.style.display = 'none';
     if (data.ok && data.encontrado) {
       const r = data.registro;
+      const ruta = parseInt(r.ruta.toString().replace('Ruta ',''));
+      const g1 = r.grupo1.toString().replace('Grupo ','');
+      const g2 = r.grupo2.toString().replace('Grupo ','');
+      const g3 = r.grupo3.toString().replace('Grupo ','');
+      const s1 = NIVELES[0].salones[ruta] ? NIVELES[0].salones[ruta][g1] : '';
+      const s2 = NIVELES[1].salones[ruta] ? NIVELES[1].salones[ruta][g2] : '';
+      const s3 = NIVELES[2].salones[ruta] ? NIVELES[2].salones[ruta][g3] : '';
       document.getElementById('yaInscritoBody').innerHTML = `
         <div class="conf-row"><span>Docente</span><span>${r.nombre} ${r.apellido}</span></div>
         <div class="conf-row"><span>Cédula</span><span>${r.cedula}</span></div>
         <div class="conf-row"><span>Programa</span><span>${r.programa}</span></div>
         <div class="conf-row"><span>Ruta</span><span>${r.ruta} · ${r.rutaNombre}</span></div>
-        <div class="conf-row"><span>Nivel 1</span><span>${r.grupo1} · ${r.salon1 || ''}</span></div>
-        <div class="conf-row"><span>Nivel 2</span><span>${r.grupo2} · ${r.salon2 || ''}</span></div>
-        <div class="conf-row"><span>Nivel 3</span><span>${r.grupo3} · ${r.salon3 || ''}</span></div>
-        <div class="conf-row"><span>Código</span><span>${r.code}</span></div>
-        <div class="conf-row"><span>Fecha</span><span>${r.fecha}</span></div>`;
+        <div class="conf-row"><span>Nivel 1 · ${NIVELES[0].dia}</span><span>${r.grupo1} · ${NIVELES[0].hora} · 📍 ${s1}</span></div>
+        <div class="conf-row"><span>Nivel 2 · ${NIVELES[1].dia}</span><span>${r.grupo2} · ${NIVELES[1].hora} · 📍 ${s2}</span></div>
+        <div class="conf-row"><span>Nivel 3 · ${NIVELES[2].dia}</span><span>${r.grupo3} · ${NIVELES[2].hora} · 📍 ${s3}</span></div>
+        <div class="conf-row"><span>Código</span><span>${r.code}</span></div>`;
       goScreen('screenYaInscrito');
     }
   } catch(e) {
