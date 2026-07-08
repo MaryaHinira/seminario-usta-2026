@@ -270,134 +270,29 @@
     <p class="hero-sub">Julio 2026 &nbsp;·&nbsp; <em class="hero-lema">Dos rutas, un solo objetivo: ¡ser los mejores!</em></p>
   </div>
 
-  <!-- ── BLOQUE 1: QUÉ ES ── -->
-  <div class="flow-block">
-    <div class="flow-explain">
-      <div class="flow-num">1</div>
-      <div class="flow-explain-body">
-        <div class="flow-title">¿Qué es este seminario?</div>
-        <div class="flow-text">El <strong>Seminario de Humanidades y Pensamiento Tomista 2026-1</strong> es un espacio académico para todos los docentes de la Universidad Santo Tomás, seccional Villavicencio. Su propósito es fortalecer las competencias docentes en lectura crítica y producción escrita desde una perspectiva humanista y tomista.</div>
+  <div style="text-align:center;padding:48px 20px;">
+    <div style="font-size:56px;margin-bottom:20px">🔒</div>
+    <h2 style="font-family:'Crimson Pro',serif;font-size:28px;font-weight:300;color:#0A1F5C;margin-bottom:12px">El período de inscripción ha cerrado</h2>
+    <p style="font-size:16px;color:var(--ink-mid);line-height:1.7;max-width:480px;margin:0 auto 24px">El plazo para inscribirse al Seminario de Humanidades y Pensamiento Tomista 2026-1 ha finalizado. Si tienes alguna inquietud, comunícate con la coordinación del seminario.</p>
+    <div style="background:#EAF2FB;border:1px solid rgba(10,31,92,.15);border-radius:12px;padding:20px;max-width:400px;margin:0 auto;">
+      <div style="font-size:13px;color:#1A6BB5;font-weight:500;margin-bottom:8px">📅 Fechas del seminario</div>
+      <div style="font-size:14px;color:var(--ink-mid);line-height:1.8">
+        Nivel 1 · Martes 7 de julio · 10:00 a.m. – 12:00 m.<br>
+        Nivel 2 · Miércoles 8 de julio · 8:00 a.m. – 10:00 a.m.<br>
+        Nivel 3 · Miércoles 8 de julio · 10:00 a.m. – 12:00 m.
       </div>
     </div>
   </div>
 
-  <div class="flow-divider"></div>
-
-  <!-- ── BLOQUE 2: RUTA ── -->
-  <div class="flow-block">
-    <div class="flow-explain">
-      <div class="flow-num">2</div>
-      <div class="flow-explain-body">
-        <div class="flow-title">Escoge tu ruta de aprendizaje</div>
-        <div class="flow-text">El seminario tiene <strong>dos rutas de aprendizaje</strong>. Debes escoger <strong>una sola</strong> y cursarla completa en los tres niveles:
-          <ul>
-            <li><strong>Ruta 1 — Lectura crítica:</strong> análisis, interpretación y evaluación de textos continuos y discontinuos.</li>
-            <li><strong>Ruta 2 — Comunicación escrita:</strong> procesos de argumentación y producción textual.</li>
-          </ul>
-          <div class="warn-inline">⚠️ Una vez confirmada la inscripción, <strong>no podrás cambiar de ruta</strong>.</div>
-        </div>
-      </div>
-    </div>
-    <div class="flow-action">
-      <p class="flow-invite">👇 Selecciona tu ruta a continuación:</p>
-      <div class="rutas-grid">
-        <div class="ruta-card" data-ruta="1" onclick="selectRuta(1)">
-          <div class="ruta-icon">📚</div>
-          <div class="ruta-num">Ruta 1</div>
-          <div class="ruta-title">Lectura crítica</div>
-          <div class="ruta-desc">Análisis, interpretación y evaluación de textos continuos y discontinuos.</div>
-        </div>
-        <div class="ruta-card" data-ruta="2" onclick="selectRuta(2)">
-          <div class="ruta-icon">✍️</div>
-          <div class="ruta-num">Ruta 2</div>
-          <div class="ruta-title">Comunicación escrita</div>
-          <div class="ruta-desc">Procesos de argumentación y producción textual.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="flow-divider"></div>
-
-  <!-- ── BLOQUE 3: NIVELES Y GRUPOS ── -->
-  <div class="flow-block">
-    <div class="flow-explain">
-      <div class="flow-num">3</div>
-      <div class="flow-explain-body">
-        <div class="flow-title">Escoge un grupo por cada nivel</div>
-        <div class="flow-text">Cada ruta tiene <strong>tres niveles progresivos</strong>. La asistencia a los tres es <strong>obligatoria</strong>. Para cada nivel hay cuatro grupos (A–D) con el mismo contenido; escoge <strong>uno por nivel</strong>, tres en total.
-          <div style="margin-top:10px;font-size:14px;color:var(--ink-mid)">Indicadores de cupos: <span class="badge-ok">disponible</span> &nbsp;<span class="badge-low">casi lleno</span> &nbsp;<span class="badge-full">lleno</span></div>
-          <div class="warn-inline">⚠️ Una vez confirmada la inscripción, <strong>no podrás cambiar de grupo</strong>.</div>
-        </div>
-      </div>
-    </div>
-    <div class="flow-action" id="nivelesSection">
-      <p class="flow-invite">👇 Escoge tu grupo en cada nivel:</p>
-      <div id="nivelesRows"></div>
-    </div>
-  </div>
-
-  <div class="flow-divider"></div>
-
-  <!-- ── BLOQUE 4: DATOS ── -->
-  <div class="flow-block">
-    <div class="flow-explain">
-      <div class="flow-num">4</div>
-      <div class="flow-explain-body">
-        <div class="flow-title">Diligencia tus datos personales</div>
-        <div class="flow-text">Al terminar de ingresar tus datos recibirás un comprobante de inscripción descargable. Recuerda que solo puedes inscribirte una vez.</div>
-      </div>
-    </div>
-    <div class="flow-action">
-      <p class="flow-invite">👇 Completa tus datos:</p>
-      <div class="fields-grid">
-        <div class="field"><label for="nombre">Nombres</label><input type="text" id="nombre" placeholder="Ej. María Fernanda"><span class="err-msg" id="err-nombre">Campo requerido</span></div>
-        <div class="field"><label for="apellido">Apellidos</label><input type="text" id="apellido" placeholder="Ej. García Ruiz"><span class="err-msg" id="err-apellido">Campo requerido</span></div>
-        <div class="field"><label for="cedula">Número de cédula</label><input type="text" id="cedula" placeholder="Solo números, sin puntos" onblur="verificarCedula(this.value)"><span class="err-msg" id="err-cedula">Campo requerido</span><span class="cedula-checking" id="cedulaChecking" style="display:none;font-size:13px;color:var(--ink-light)">⏳ Verificando...</span></div>
-        <div class="field"><label for="email">Correo institucional</label><input type="email" id="email" placeholder="usuario@ustavillavicencio.edu.co"><span class="err-msg" id="err-email">Ingresa un correo válido</span></div>
-        <div class="field full">
-          <label for="programa">Programa académico</label>
-          <select id="programa">
-            <option value="">— Selecciona tu programa —</option>
-            <option>Administración de Empresas Agropecuarias</option>
-            <option>Arquitectura</option>
-            <option>Arte y Cultura</option>
-            <option>Ciencias Básicas</option>
-            <option>CILCE</option>
-            <option>Cultura Física, Deporte y Recreación</option>
-            <option>Contaduría Pública</option>
-            <option>Derecho</option>
-            <option>Ingeniería Ambiental</option>
-            <option>Ingeniería Civil</option>
-            <option>Ingeniería Industrial</option>
-            <option>Ingeniería Mecánica</option>
-            <option>Ingeniería de Sistemas</option>
-            <option>Ingeniería Mecatrónica</option>
-            <option>Lenguas Extranjeras</option>
-            <option>Negocios Internacionales</option>
-            <option>Psicología</option>
-          </select>
-          <span class="err-msg" id="err-programa">Selecciona un programa</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="flow-divider"></div>
-
-  <!-- ── RESUMEN Y CONFIRMACIÓN ── -->
-  <div class="summary-card" id="summaryCard">
-    <div class="sec-label" style="margin-bottom:12px">Verifica tu inscripción antes de confirmar</div>
-    <div id="summaryContent"></div>
-    <div class="warn-box" style="margin-top:14px">⚠️ Al confirmar, tu inscripción quedará registrada. Te pedimos verificar bien tu selección, pues no será posible hacer cambios de ruta ni de grupo.</div>
-  </div>
-
-  <div class="alert-bar" id="alertBar"></div>
-  <button class="submit-btn" id="submitBtn" onclick="handleSubmit()">Confirmar inscripción</button>
+  <p style="font-size:12px;color:var(--ink-light);text-align:center;margin-top:24px">
+    ¿Ya estás inscrito y quieres consultar tu grupo? <button style="font-size:12px;color:#1A6BB5;cursor:pointer;background:none;border:none;text-decoration:underline;" onclick="goScreen('screenYaInscrito2')">Consulta aquí</button>
+  </p>
+  <p style="font-size:12px;color:var(--ink-light);text-align:center;margin-top:8px">
+    <button style="font-size:12px;color:rgba(10,31,92,.3);cursor:pointer;background:none;border:none;text-decoration:underline;" onclick="goScreen('screenAdminLogin')">Admin</button>
+  </p>
 
 </div>
 </div>
-
 <!-- ── CONFIRMACIÓN ── -->
 <div class="screen" id="screenSuccess">
 <div class="container">
@@ -439,6 +334,30 @@
       <div id="yaInscritoBody"></div>
     </div>
     <p style="font-size:14px;color:var(--ink-mid);margin-top:16px;line-height:1.6">Si crees que hay un error, comunícate con la coordinación del seminario.</p>
+  </div>
+</div>
+</div>
+
+<!-- ── CONSULTA POR CÉDULA ── -->
+<div class="screen" id="screenYaInscrito2">
+<div class="container">
+  <div style="text-align:center;padding:32px 0 20px;">
+    <div style="font-size:40px;margin-bottom:12px">🔍</div>
+    <h2 style="font-family:'Crimson Pro',serif;font-size:24px;font-weight:300;color:#0A1F5C;margin-bottom:8px">Consulta tu inscripción</h2>
+    <p style="font-size:15px;color:var(--ink-mid);margin-bottom:24px">Ingresa tu número de cédula para ver tu ruta, grupos y salones.</p>
+    <div style="max-width:320px;margin:0 auto;">
+      <div class="field" style="text-align:left;margin-bottom:12px">
+        <label for="cedulaConsulta">Número de cédula</label>
+        <input type="text" id="cedulaConsulta" placeholder="Solo números, sin puntos" style="width:100%">
+      </div>
+      <button class="submit-btn" onclick="consultarCedula()">Consultar</button>
+      <div id="consultaChecking" style="display:none;font-size:13px;color:var(--ink-light);margin-top:10px">⏳ Buscando...</div>
+      <div id="consultaError" style="display:none;font-size:14px;color:#7A2020;margin-top:10px;background:#FBEDED;border-radius:8px;padding:10px 14px;"></div>
+      <div id="consultaResultado" style="display:none;text-align:left;margin-top:16px;"></div>
+    </div>
+    <p style="font-size:12px;color:var(--ink-light);margin-top:20px">
+      <button style="font-size:12px;color:#1A6BB5;cursor:pointer;background:none;border:none;text-decoration:underline;" onclick="goScreen('screenForm')">← Volver</button>
+    </p>
   </div>
 </div>
 </div>
@@ -610,6 +529,53 @@ function validateForm(){
     if(!valid)ok=false;
   });
   return ok;
+}
+async function consultarCedula() {
+  const ced = document.getElementById('cedulaConsulta').value.trim();
+  if (!ced || ced.length < 4) { return; }
+  const checking = document.getElementById('consultaChecking');
+  const error = document.getElementById('consultaError');
+  const resultado = document.getElementById('consultaResultado');
+  checking.style.display = 'block';
+  error.style.display = 'none';
+  resultado.style.display = 'none';
+  try {
+    const res = await fetch(`${SHEET_URL}?action=buscar&cedula=${encodeURIComponent(ced)}`);
+    const data = await res.json();
+    checking.style.display = 'none';
+    if (data.ok && data.encontrado) {
+      const r = data.registro;
+      const ruta = parseInt(r.ruta.toString().replace('Ruta ',''));
+      const g1 = r.grupo1.toString().replace('Grupo ','');
+      const g2 = r.grupo2.toString().replace('Grupo ','');
+      const g3 = r.grupo3.toString().replace('Grupo ','');
+      const s1 = NIVELES[0].salones[ruta] ? NIVELES[0].salones[ruta][g1] : '';
+      const s2 = NIVELES[1].salones[ruta] ? NIVELES[1].salones[ruta][g2] : '';
+      const s3 = NIVELES[2].salones[ruta] ? NIVELES[2].salones[ruta][g3] : '';
+      resultado.innerHTML = `
+        <div class="conf-card">
+          <div class="conf-header-block">
+            <div class="conf-logo-title">Universidad Santo Tomás · Villavicencio</div>
+            <div class="conf-logo-sub">Seminario de Humanidades y Pensamiento Tomista 2026-1</div>
+          </div>
+          <div class="conf-row"><span>Docente</span><span>${r.nombre} ${r.apellido}</span></div>
+          <div class="conf-row"><span>Programa</span><span>${r.programa}</span></div>
+          <div class="conf-row"><span>Ruta</span><span>${r.ruta} · ${r.rutaNombre}</span></div>
+          <div class="conf-row"><span>Nivel 1 · ${NIVELES[0].dia}</span><span>${r.grupo1} · ${NIVELES[0].hora}<br>📍 ${s1}</span></div>
+          <div class="conf-row"><span>Nivel 2 · ${NIVELES[1].dia}</span><span>${r.grupo2} · ${NIVELES[1].hora}<br>📍 ${s2}</span></div>
+          <div class="conf-row"><span>Nivel 3 · ${NIVELES[2].dia}</span><span>${r.grupo3} · ${NIVELES[2].hora}<br>📍 ${s3}</span></div>
+          <div class="conf-row"><span>Código</span><span>${r.code}</span></div>
+        </div>`;
+      resultado.style.display = 'block';
+    } else {
+      error.textContent = 'No encontramos una inscripción con ese número de cédula. Verifica el número e intenta de nuevo.';
+      error.style.display = 'block';
+    }
+  } catch(e) {
+    checking.style.display = 'none';
+    error.textContent = 'Error de conexión. Intenta de nuevo en unos segundos.';
+    error.style.display = 'block';
+  }
 }
 async function verificarCedula(ced) {
   if (!ced || ced.trim().length < 4) return;
